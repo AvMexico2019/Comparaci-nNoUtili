@@ -41,11 +41,18 @@ namespace ComparaciónNoUtili
             }
         }
 
+        static void BusquedaVigentes()
+        {
+            ArrendamientoInmuebleEntities ctx = new ArrendamientoInmuebleEntities();
+            var Contartos = ctx.ContratoArrto;
+            var Vigentes = ctx.ContratosVigentes;
+        }
+
         static void Main(string[] args)
         {
-            
-            
-            
+            //comparacionNoUtili();
+            BusquedaVigentes();
+
             Console.ReadLine();
         }
     }
