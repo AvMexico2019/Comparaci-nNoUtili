@@ -44,8 +44,35 @@ namespace ComparaciónNoUtili
         static void BusquedaVigentes()
         {
             ArrendamientoInmuebleEntities ctx = new ArrendamientoInmuebleEntities();
-            var Contartos = ctx.ContratoArrto;
+            var Contratos = ctx.ContratoArrto;
             var Vigentes = ctx.ContratosVigentes;
+            foreach (var vigente in Vigentes)
+            {
+                
+                var result = (from contrato in Contratos
+                              where vigente.FolioContrato == contrato.FolioContratoArrto
+                              select new
+                              {
+                                  FolioContrato = contrato.FolioContratoArrto,
+                                  IdContrato    = contrato.IdContratoArrto,
+                                  Inst = contrato.Fk_IdInstitucion,
+                                  FechaFin = contrato.FechaFinOcupacion,
+                                  FechaFinVigente = vigente.FechaContratoHasta
+                              });
+                int numeroRegistros = result.Count();
+                Console.WriteLine("/" + vigente.FolioContrato + "/ " + numeroRegistros);
+                foreach (var r in result)
+                {
+                    DateTime fecha = r.FechaFin != null ? (DateTime)r.FechaFin :
+                    new DateTime(1990, 1, 1);
+                    DateTime fechaVigente = r.FechaFinVigente != null ? (DateTime)r.FechaFinVigente :
+                    new DateTime(1990, 1, 1);
+                    Console.WriteLine("-" + r.FolioContrato + "-" + r.IdContrato + "-" +
+                        r.Inst + "-" + 
+                        fecha + "-" + fechaVigente);
+                }
+                if (numeroRegistros == 0) Console.ReadKey();
+            }
         }
 
         static void Main(string[] args)
