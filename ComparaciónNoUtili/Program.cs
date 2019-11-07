@@ -8,7 +8,7 @@ namespace ComparaciónNoUtili
 {
     class Program
     {
-        static void Main(string[] args)
+        static void comparacionNoUtili()
         {
             ArrendamientoInmuebleEntities ctx = new ArrendamientoInmuebleEntities();
             var tablaTest = ctx.NoUtiliAuditoria2019T;
@@ -36,11 +36,22 @@ namespace ComparaciónNoUtili
                     new DateTime(1990, 1, 1);
                     Console.WriteLine("-" + r.IDInmueble + "-" + r.IDInmuebleProd + "-" +
                         r.Inst + "-" + r.InstProd + "-" +
-                        fecha + "-" + fechaProd); 
+                        fecha + "-" + fechaProd);
                 }
             }
+        }
+
+        static void Main(string[] args)
+        {
             
-            /*
+            
+            
+            Console.ReadLine();
+        }
+    }
+}
+
+/*
             foreach(NoUtiliAuditoria2019T renglonTest in tablaTest)
             {
                 DateTime fecha = renglonTest.FechaFinOcupacion != null ? (DateTime) renglonTest.FechaFinOcupacion :
@@ -52,7 +63,3 @@ namespace ComparaciónNoUtili
                 
             }
             */
-            Console.ReadLine();
-        }
-    }
-}
