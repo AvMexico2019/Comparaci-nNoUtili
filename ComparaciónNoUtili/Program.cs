@@ -46,32 +46,79 @@ namespace ComparaciónNoUtili
             ArrendamientoInmuebleEntities ctx = new ArrendamientoInmuebleEntities();
             var Contratos = ctx.ContratoArrto;
             var Vigentes = ctx.ContratosVigentes;
+            var NoUtili = ctx.NoUtiliAuditoria2019T;
+
             foreach (var vigente in Vigentes)
             {
-                
+                // result contiene los contratos vigentes que estan en la base cuyo inmueble lo podemos encontrar
+                // aun es necesaro verificar que los datos del inmueble son corretos
                 var result = (from contrato in Contratos
+                              join relacionInv in NoUtili
+                              on contrato.Fk_IdInmuebleArrendamiento equals relacionInv.IdInmuebleArrendamiento
                               where vigente.FolioContrato == contrato.FolioContratoArrto
                               select new
                               {
                                   FolioContrato = contrato.FolioContratoArrto,
                                   IdContrato    = contrato.IdContratoArrto,
+                                  IdInmueble = contrato.Fk_IdInmuebleArrendamiento,
                                   Inst = contrato.Fk_IdInstitucion,
                                   FechaFin = contrato.FechaFinOcupacion,
                                   FechaFinVigente = vigente.FechaContratoHasta
                               });
                 int numeroRegistros = result.Count();
-                Console.WriteLine("/" + vigente.FolioContrato + "/ " + numeroRegistros);
-                foreach (var r in result)
+                if (numeroRegistros > 0)
                 {
-                    DateTime fecha = r.FechaFin != null ? (DateTime)r.FechaFin :
-                    new DateTime(1990, 1, 1);
-                    DateTime fechaVigente = r.FechaFinVigente != null ? (DateTime)r.FechaFinVigente :
-                    new DateTime(1990, 1, 1);
-                    Console.WriteLine("-" + r.FolioContrato + "-" + r.IdContrato + "-" +
-                        r.Inst + "-" + 
-                        fecha + "-" + fechaVigente);
+                    Console.WriteLine("C /" + vigente.FolioContrato + "/ " + numeroRegistros);
+                    foreach (var r in result)
+                    {
+                        DateTime fecha = r.FechaFin != null ? (DateTime)r.FechaFin :
+                        new DateTime(1990, 1, 1);
+                        DateTime fechaVigente = r.FechaFinVigente != null ? (DateTime)r.FechaFinVigente :
+                        new DateTime(1990, 1, 1);
+                        Console.WriteLine("-" + r.FolioContrato + "-" + r.IdContrato + "-" +
+                            r.IdInmueble + "-" +
+                            r.Inst + "-" +
+                            fecha + "-" + fechaVigente);
+                    }
                 }
-                if (numeroRegistros == 0) Console.ReadKey();
+                else
+                {
+                    // incompleto contiene los contratos vigentes que estan en la base y no tienen un inmueble localizable 
+                    var incompleto = (from contrato in Contratos
+                                  where vigente.FolioContrato == contrato.FolioContratoArrto
+                                  select new
+                                  {
+                                      FolioContrato = contrato.FolioContratoArrto,
+                                      IdContrato = contrato.IdContratoArrto,
+                                      Inst = contrato.Fk_IdInstitucion,
+                                      FechaFin = contrato.FechaFinOcupacion,
+                                      FechaFinVigente = vigente.FechaContratoHasta
+                                  });
+                    Console.WriteLine("I /" + vigente.FolioContrato + "/ " + numeroRegistros);
+                    foreach (var r in incompleto)
+                    {
+                        DateTime fecha = r.FechaFin != null ? (DateTime)r.FechaFin :
+                        new DateTime(1990, 1, 1);
+                        DateTime fechaVigente = r.FechaFinVigente != null ? (DateTime)r.FechaFinVigente :
+                        new DateTime(1990, 1, 1);
+                        Console.WriteLine("-" + r.FolioContrato + "-" + r.IdContrato + "-" +
+                            r.Inst + "-" +
+                            fecha + "-" + fechaVigente);
+                        var contXIDEncontrato = (from relacionInv in NoUtili
+                                              where r.IdContrato == relacionInv.FolioContratoArrto
+                                              select relacionInv);
+                        Console.WriteLine("Datos encontrados para verificar");
+                        foreach(var rIDE in contXIDEncontrato)
+                        {
+                            DateTime fechaID = rIDE.FechaFinOcupacion != null ? (DateTime)rIDE.FechaFinOcupacion :
+                                new DateTime(1990, 1, 1);
+                            Console.WriteLine("-FolioContrato " + rIDE.FolioContratoArrto + "-" + fechaID + "-" +
+                                rIDE.IdInmuebleArrendamiento + "-" + rIDE.Fk_IdInstitucion);
+                        }
+                        
+                    }
+                    Console.ReadKey();
+                } 
             }
         }
 
@@ -80,6 +127,8 @@ namespace ComparaciónNoUtili
             //comparacionNoUtili();
             BusquedaVigentes();
 
+            /******  JUST TO SEE THE END   ****/
+            Console.WriteLine("F I N");
             Console.ReadLine();
         }
     }
