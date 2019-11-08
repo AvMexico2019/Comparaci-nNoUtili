@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -186,6 +187,9 @@
     <Compile Include="Movimiento.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
+    <Compile Include="NoUtiliAuditoria2019P_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
     <Compile Include="NoUtiliAuditoria2019T.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
@@ -235,30 +239,33 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <EntityDeploy Include="ModelosContrato.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelosContrato.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="ModelosContrato.edmx.diagram">
       <DependentUpon>ModelosContrato.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="ModelosContrato.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelosContrato.Context.cs</LastGenOutput>
       <DependentUpon>ModelosContrato.edmx</DependentUpon>
+      <LastGenOutput>ModelosContrato.Context.cs</LastGenOutput>
     </Content>
     <Content Include="ModelosContrato.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelosContrato.edmx</DependentUpon>
       <LastGenOutput>ModelosContrato.cs</LastGenOutput>
     </Content>
+    <Content Include="SQL\Create_Noutili.sql" />
+    <Content Include="SQL\spuNoUtili.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

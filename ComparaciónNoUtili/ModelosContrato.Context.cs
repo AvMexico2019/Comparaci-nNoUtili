@@ -12,6 +12,8 @@ namespace ComparaciónNoUtili
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ArrendamientoInmuebleEntities : DbContext
     {
@@ -80,5 +82,10 @@ namespace ComparaciónNoUtili
         public virtual DbSet<TRADUCTOR_cat> TRADUCTOR_cat { get; set; }
         public virtual DbSet<TraductorRUSP_INST> TraductorRUSP_INST { get; set; }
         public virtual DbSet<TraductorRUSP_Sector> TraductorRUSP_Sector { get; set; }
+    
+        public virtual ObjectResult<NoUtiliAuditoria2019P_Result> NoUtiliAuditoria2019P()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NoUtiliAuditoria2019P_Result>("NoUtiliAuditoria2019P");
+        }
     }
 }

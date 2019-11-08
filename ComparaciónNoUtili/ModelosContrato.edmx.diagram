@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a4fc99f6b0314de88ce624b5dcff7076" Name="Diagram1">
+      <Diagram DiagramId="bfe3483139214e249772d1e9f147bca8" Name="Diagram1">
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.AplicacionConcepto" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.AreaPrioridad" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />

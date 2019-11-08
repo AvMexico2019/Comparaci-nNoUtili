@@ -1882,6 +1882,7 @@ warning 6002: The table/view 'ArrendamientoInmueble.dbo.TraductorRUSP_Sector' do
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="NoUtiliAuditoria2019P" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ArrendamientoInmuebleModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AplicacionConcepto" EntityType="Self.AplicacionConcepto" Schema="dbo" store:Type="Tables" />
@@ -3928,7 +3929,41 @@ warning 6002: The table/view 'ArrendamientoInmueble.dbo.TraductorRUSP_Sector' do
             <End Role="Rel_ConceptoRespValor" EntitySet="Rel_ConceptoRespValor" />
             <End Role="RespuestaConcepto" EntitySet="RespuestaConcepto" />
           </AssociationSet>
+          <FunctionImport Name="NoUtiliAuditoria2019P" ReturnType="Collection(ArrendamientoInmuebleModel.NoUtiliAuditoria2019P_Result)" />
         </EntityContainer>
+        <ComplexType Name="NoUtiliAuditoria2019P_Result">
+          <Property Type="Int32" Name="IdInmuebleArrendamiento" Nullable="true" />
+          <Property Type="Int32" Name="Fk_IdInstitucion" Nullable="true" />
+          <Property Type="String" Name="CargoUsuarioRegistro" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Fk_IdUsuarioRegistro" Nullable="true" />
+          <Property Type="DateTime" Name="FechaRegistro" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinOcupacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="NombreInmueble" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Fk_IdPais" Nullable="true" />
+          <Property Type="Int32" Name="Fk_IdEstado" Nullable="true" />
+          <Property Type="Int32" Name="Fk_IdMinicipio" Nullable="true" />
+          <Property Type="Int32" Name="Fk_IdLocalidad" Nullable="true" />
+          <Property Type="Int32" Name="Fk_IdTipoVialidad" Nullable="true" />
+          <Property Type="String" Name="NombreVialidad" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="NumExterior" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="NumInterior" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="CodigoPostal" Nullable="true" />
+          <Property Type="Int32" Name="CodigoPostalExtranjero" Nullable="true" />
+          <Property Type="Int32" Name="EstadoExtranjero" Nullable="true" />
+          <Property Type="Int32" Name="CiudadExtranjero" Nullable="true" />
+          <Property Type="Int32" Name="MunicipioExtranjero" Nullable="true" />
+          <Property Type="Int32" Name="FolioAplicaciónConcepto" Nullable="true" />
+          <Property Type="Int32" Name="FolioContratoArrto" Nullable="true" />
+          <Property Type="String" Name="OtraColonia" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="DescripcionTipoContrato" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="DescripcionTipoArrendamiento" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Espadre" Nullable="true" />
+          <Property Type="Int32" Name="EstatusRegistroContrato" Nullable="true" />
+          <Property Type="String" Name="RIUF" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Observaciones" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="IsNotReusable" Nullable="true" />
+          <Property Type="Int32" Name="Identificador" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4936,6 +4971,43 @@ warning 6002: The table/view 'ArrendamientoInmueble.dbo.TraductorRUSP_Sector' do
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="NoUtiliAuditoria2019P" FunctionName="ArrendamientoInmuebleModel.Store.NoUtiliAuditoria2019P">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ArrendamientoInmuebleModel.NoUtiliAuditoria2019P_Result">
+                <ScalarProperty Name="IdInmuebleArrendamiento" ColumnName="IdInmuebleArrendamiento" />
+                <ScalarProperty Name="Fk_IdInstitucion" ColumnName="Fk_IdInstitucion" />
+                <ScalarProperty Name="CargoUsuarioRegistro" ColumnName="CargoUsuarioRegistro" />
+                <ScalarProperty Name="Fk_IdUsuarioRegistro" ColumnName="Fk_IdUsuarioRegistro" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="FechaFinOcupacion" ColumnName="FechaFinOcupacion" />
+                <ScalarProperty Name="NombreInmueble" ColumnName="NombreInmueble" />
+                <ScalarProperty Name="Fk_IdPais" ColumnName="Fk_IdPais" />
+                <ScalarProperty Name="Fk_IdEstado" ColumnName="Fk_IdEstado" />
+                <ScalarProperty Name="Fk_IdMinicipio" ColumnName="Fk_IdMinicipio" />
+                <ScalarProperty Name="Fk_IdLocalidad" ColumnName="Fk_IdLocalidad" />
+                <ScalarProperty Name="Fk_IdTipoVialidad" ColumnName="Fk_IdTipoVialidad" />
+                <ScalarProperty Name="NombreVialidad" ColumnName="NombreVialidad" />
+                <ScalarProperty Name="NumExterior" ColumnName="NumExterior" />
+                <ScalarProperty Name="NumInterior" ColumnName="NumInterior" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="CodigoPostalExtranjero" ColumnName="CodigoPostalExtranjero" />
+                <ScalarProperty Name="EstadoExtranjero" ColumnName="EstadoExtranjero" />
+                <ScalarProperty Name="CiudadExtranjero" ColumnName="CiudadExtranjero" />
+                <ScalarProperty Name="MunicipioExtranjero" ColumnName="MunicipioExtranjero" />
+                <ScalarProperty Name="FolioAplicaciónConcepto" ColumnName="FolioAplicaciónConcepto" />
+                <ScalarProperty Name="FolioContratoArrto" ColumnName="FolioContratoArrto" />
+                <ScalarProperty Name="OtraColonia" ColumnName="OtraColonia" />
+                <ScalarProperty Name="DescripcionTipoContrato" ColumnName="DescripcionTipoContrato" />
+                <ScalarProperty Name="DescripcionTipoArrendamiento" ColumnName="DescripcionTipoArrendamiento" />
+                <ScalarProperty Name="Espadre" ColumnName="Espadre" />
+                <ScalarProperty Name="EstatusRegistroContrato" ColumnName="EstatusRegistroContrato" />
+                <ScalarProperty Name="RIUF" ColumnName="RIUF" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IsNotReusable" ColumnName="IsNotReusable" />
+                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
