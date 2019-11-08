@@ -41,12 +41,28 @@ namespace ComparaciónNoUtili
             }
         }
 
+        static string SinAcentos(string IN)
+        {
+            return IN.Replace("á", "a")
+                .Replace("é", "e")
+                .Replace("í", "i")
+                .Replace("ó", "o")
+                .Replace("ú", "u")
+                .Replace("Á", "A")
+                .Replace("É", "E")
+                .Replace("Í", "I")
+                .Replace("Ó", "O")
+                .Replace("Ú", "U");
+        }
+
         static void BusquedaVigentes()
         {
+            int ContratosSinInmueble = 0;
             ArrendamientoInmuebleEntities ctx = new ArrendamientoInmuebleEntities();
             var Contratos = ctx.ContratoArrto;
             var Vigentes = ctx.ContratosVigentes;
             var NoUtili = ctx.NoUtiliAuditoria2019T;
+            var inmuebles = ctx.InmuebleArrendamiento;
 
             foreach (var vigente in Vigentes)
             {
@@ -68,17 +84,17 @@ namespace ComparaciónNoUtili
                 int numeroRegistros = result.Count();
                 if (numeroRegistros > 0)
                 {
-                    Console.WriteLine("C /" + vigente.FolioContrato + "/ " + numeroRegistros);
+                   //Console.WriteLine("C /" + vigente.FolioContrato + "/ " + numeroRegistros);
                     foreach (var r in result)
                     {
                         DateTime fecha = r.FechaFin != null ? (DateTime)r.FechaFin :
                         new DateTime(1990, 1, 1);
                         DateTime fechaVigente = r.FechaFinVigente != null ? (DateTime)r.FechaFinVigente :
                         new DateTime(1990, 1, 1);
-                        Console.WriteLine("-" + r.FolioContrato + "-" + r.IdContrato + "-" +
-                            r.IdInmueble + "-" +
-                            r.Inst + "-" +
-                            fecha + "-" + fechaVigente);
+                        //Console.WriteLine("-" + r.FolioContrato + "-" + r.IdContrato + "-" +
+                        //    r.IdInmueble + "-" +
+                        //    r.Inst + "-" +
+                        //    fecha + "-" + fechaVigente);
                     }
                 }
                 else
@@ -94,7 +110,8 @@ namespace ComparaciónNoUtili
                                       FechaFin = contrato.FechaFinOcupacion,
                                       FechaFinVigente = vigente.FechaContratoHasta
                                   });
-                    Console.WriteLine("I /" + vigente.FolioContrato + "/ " + numeroRegistros);
+                    Console.WriteLine("\nI /" + vigente.FolioContrato + "/ " + numeroRegistros + "-" + vigente.Calle + "-" + vigente.NumExterior + " " +
+                        vigente.CodigoPostal);
                     foreach (var r in incompleto)
                     {
                         DateTime fecha = r.FechaFin != null ? (DateTime)r.FechaFin :
@@ -104,22 +121,74 @@ namespace ComparaciónNoUtili
                         Console.WriteLine("-" + r.FolioContrato + "-" + r.IdContrato + "-" +
                             r.Inst + "-" +
                             fecha + "-" + fechaVigente);
+                        /*
+                        // Existia la posibilidad de que el numero de folio de contrato fuera un IdContrato, pero en muchos casos
+                        // No apunta a ningún lado con información válida
                         var contXIDEncontrato = (from relacionInv in NoUtili
                                               where r.IdContrato == relacionInv.FolioContratoArrto
                                               select relacionInv);
-                        Console.WriteLine("Datos encontrados para verificar");
-                        foreach(var rIDE in contXIDEncontrato)
+                        if (contXIDEncontrato.Count() > 0)
                         {
-                            DateTime fechaID = rIDE.FechaFinOcupacion != null ? (DateTime)rIDE.FechaFinOcupacion :
-                                new DateTime(1990, 1, 1);
-                            Console.WriteLine("-FolioContrato " + rIDE.FolioContratoArrto + "-" + fechaID + "-" +
-                                rIDE.IdInmuebleArrendamiento + "-" + rIDE.Fk_IdInstitucion);
+                            Console.WriteLine("Datos encontrados para verificar");
+                            foreach (var rIDE in contXIDEncontrato)
+                            {
+                                DateTime fechaID = rIDE.FechaFinOcupacion != null ? (DateTime)rIDE.FechaFinOcupacion :
+                                    new DateTime(1990, 1, 1);
+                                Console.WriteLine("-FolioContrato " + rIDE.FolioContratoArrto + "-" + fechaID + "-" +
+                                    rIDE.IdInmuebleArrendamiento + "-" + rIDE.Fk_IdInstitucion + "-" + rIDE.NombreVialidad + "-" + rIDE.NumExterior);
+                            }
                         }
-                        
+                        else
+                        {
+                            Console.WriteLine("- Sin datos");
+                        }
+                        */
+
+                        // Vamos a buscar el inmueble por calle y numero exterior
+                        // si funciona con el IdInmueble buscaremos el contrato para tratar de cuadrar información
+                        var busqInm = (from inmueble in inmuebles
+                                                 where vigente.Calle.Replace("á", "a")
+                                                                    .Replace("é", "e")
+                                                                    .Replace("í", "i")
+                                                                    .Replace("ó", "o")
+                                                                    .Replace("ú", "u")
+                                                                    .Replace("Á", "A")
+                                                                    .Replace("É", "E")
+                                                                    .Replace("Í", "I")
+                                                                    .Replace("Ó", "O")
+                                                                    .Replace("Ú", "U") == inmueble.NombreVialidad.Replace("á", "a")
+                                                                    .Replace("é", "e")
+                                                                    .Replace("í", "i")
+                                                                    .Replace("ó", "o")
+                                                                    .Replace("ú", "u")
+                                                                    .Replace("Á", "A")
+                                                                    .Replace("É", "E")
+                                                                    .Replace("Í", "I")
+                                                                    .Replace("Ó", "O")
+                                                                    .Replace("Ú", "U") & 
+                                                    vigente.NumExterior == inmueble.NumExterior
+                                                 select inmueble);
+                        if (busqInm.Count() > 0)
+                        {
+                            // Estimo que se puede corregir.
+                            
+                            Console.WriteLine("Inmueble Encontrado");
+                            foreach (var inmueb in busqInm)
+                            {
+                                Console.WriteLine("-Inmueble " + inmueb.IdInmuebleArrendamiento + "-" + inmueb.CodigoPostal);
+                            }
+                            
+                        }
+                        else
+                        {
+                            Console.WriteLine("- Sin datos " + (++ContratosSinInmueble));
+                        }
+
                     }
-                    Console.ReadKey();
+                    // Console.ReadKey();
                 } 
             }
+            Console.WriteLine("Contratos sin inmueble total " + ContratosSinInmueble);
         }
 
         static void Main(string[] args)
