@@ -12,19 +12,16 @@ namespace ComparaciónNoUtili
     using System;
     using System.Collections.Generic;
     
-    public partial class Cat_DiasInhabiles
+    public partial class Cat_TraductorInstitucion1
     {
-        public int Id_DiaInhabil { get; set; }
-        public System.DateTime Alta { get; set; }
-        public Nullable<int> IdUsuario { get; set; }
-        public int Dia { get; set; }
-        public int Mes { get; set; }
-        public Nullable<int> Anio { get; set; }
-        public int Fk_IdCalendario { get; set; }
-        public bool EstatusRegistro { get; set; }
-        public int Fk_IdUsuarioRegistro { get; set; }
+        public int IdInstitucionActual { get; set; }
+        public string DescripcionInstitucion { get; set; }
+        public int IdInstitucionAnterior { get; set; }
+        public Nullable<int> IdNatJuridica { get; set; }
+        public Nullable<int> Fk_IdSector { get; set; }
+        public Nullable<int> Fk_IdApliacion { get; set; }
         public System.DateTime FechaRegistro { get; set; }
     
-        public virtual Cat_Calendario Cat_Calendario { get; set; }
+        public virtual Cat_Institucion Cat_Institucion { get; set; }
     }
 }

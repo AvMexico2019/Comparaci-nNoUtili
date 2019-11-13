@@ -12,27 +12,29 @@ namespace ComparaciónNoUtili
     using System;
     using System.Collections.Generic;
     
-    public partial class Cat_Institucion
+    public partial class Cat_Localidades
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cat_Institucion()
+        public Cat_Localidades()
         {
-            this.Cat_TraductorInstitucion1 = new HashSet<Cat_TraductorInstitucion1>();
+            this.Cat_Asentamiento = new HashSet<Cat_Asentamiento>();
         }
     
-        public int IdInstitucion { get; set; }
-        public string DescripcionInstitucion { get; set; }
-        public Nullable<int> Fk_IdNatJuridica { get; set; }
-        public Nullable<int> Fk_IdSector { get; set; }
-        public Nullable<int> Fk_IdTipoInstitucion { get; set; }
+        public int IdLocalidad { get; set; }
+        public int Fk_IdMunicipio { get; set; }
+        public string DescripcionLocalidad { get; set; }
+        public string Ambito { get; set; }
+        public double Latitud { get; set; }
+        public double Longitud { get; set; }
+        public double Lat_Dec { get; set; }
+        public double Lon_Dec { get; set; }
+        public double Altitud { get; set; }
         public bool EstatusRegistro { get; set; }
         public int Fk_IdUsuarioRegistro { get; set; }
         public System.DateTime FechaRegistro { get; set; }
     
-        public virtual Cat_NatJuridica Cat_NatJuridica { get; set; }
-        public virtual Cat_Sector Cat_Sector { get; set; }
-        public virtual Cat_TipoInstitucion Cat_TipoInstitucion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cat_TraductorInstitucion1> Cat_TraductorInstitucion1 { get; set; }
+        public virtual ICollection<Cat_Asentamiento> Cat_Asentamiento { get; set; }
+        public virtual Cat_Municipio Cat_Municipio { get; set; }
     }
 }

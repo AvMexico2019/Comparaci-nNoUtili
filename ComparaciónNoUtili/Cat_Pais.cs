@@ -14,11 +14,20 @@ namespace ComparaciónNoUtili
     
     public partial class Cat_Pais
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cat_Pais()
+        {
+            this.Cat_Estado = new HashSet<Cat_Estado>();
+        }
+    
         public int IdPais { get; set; }
         public string DescripcionPais { get; set; }
         public string Abreviatura { get; set; }
         public bool EstatusRegistro { get; set; }
         public int Fk_IdUsuarioRegistro { get; set; }
         public System.DateTime FechaRegistro { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cat_Estado> Cat_Estado { get; set; }
     }
 }

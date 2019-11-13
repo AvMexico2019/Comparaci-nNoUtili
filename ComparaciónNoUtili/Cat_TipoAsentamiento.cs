@@ -12,19 +12,21 @@ namespace ComparaciónNoUtili
     using System;
     using System.Collections.Generic;
     
-    public partial class Cat_DiasInhabiles
+    public partial class Cat_TipoAsentamiento
     {
-        public int Id_DiaInhabil { get; set; }
-        public System.DateTime Alta { get; set; }
-        public Nullable<int> IdUsuario { get; set; }
-        public int Dia { get; set; }
-        public int Mes { get; set; }
-        public Nullable<int> Anio { get; set; }
-        public int Fk_IdCalendario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cat_TipoAsentamiento()
+        {
+            this.Cat_Asentamiento = new HashSet<Cat_Asentamiento>();
+        }
+    
+        public int IdTipoAsentamiento { get; set; }
+        public string DescripcionTipoAsentamiento { get; set; }
         public bool EstatusRegistro { get; set; }
         public int Fk_IdUsuarioRegistro { get; set; }
         public System.DateTime FechaRegistro { get; set; }
     
-        public virtual Cat_Calendario Cat_Calendario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cat_Asentamiento> Cat_Asentamiento { get; set; }
     }
 }

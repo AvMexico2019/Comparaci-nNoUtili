@@ -25,6 +25,9 @@ namespace ComparaciónNoUtili
         public int Fk_IdUsuarioRegistro { get; set; }
         public System.DateTime FechaRegistro { get; set; }
     
+        public virtual Cat_Estado Cat_Estado { get; set; }
         public virtual Cat_Municipio Cat_Municipio { get; set; }
+        public virtual Cat_TipoAsenta Cat_TipoAsenta { get; set; }
+        public virtual Cat_Zona Cat_Zona { get; set; }
     }
 }

@@ -12,15 +12,11 @@ namespace ComparaciónNoUtili
     using System;
     using System.Collections.Generic;
     
-    public partial class Cat_Parametro
+    public partial class CAT_TRIMESTRE
     {
-        public int IdParametro { get; set; }
-        public string NombreParametro { get; set; }
-        public string DescripcionParametro { get; set; }
-        public string ValorParametro { get; set; }
-        public string ValorAdicionalParametro { get; set; }
-        public bool EstatusRegistro { get; set; }
-        public int Fk_IdUsuarioRegistro { get; set; }
-        public System.DateTime FechaRegistro { get; set; }
+        public int TRI_ID_TRIMESTRE { get; set; }
+        public string TRI_DESCRIPCION { get; set; }
+        public Nullable<bool> TRI_ESTATUS_REGISTRO { get; set; }
+        public Nullable<System.DateTime> TRI_FECHA_REGISTRO { get; set; }
     }
 }

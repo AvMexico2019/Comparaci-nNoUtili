@@ -12,27 +12,24 @@ namespace ComparaciónNoUtili
     using System;
     using System.Collections.Generic;
     
-    public partial class Cat_Institucion
+    public partial class RelCargoUnidadNeg
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cat_Institucion()
+        public RelCargoUnidadNeg()
         {
-            this.Cat_TraductorInstitucion1 = new HashSet<Cat_TraductorInstitucion1>();
+            this.Cat_Emisor = new HashSet<Cat_Emisor>();
         }
     
-        public int IdInstitucion { get; set; }
-        public string DescripcionInstitucion { get; set; }
-        public Nullable<int> Fk_IdNatJuridica { get; set; }
-        public Nullable<int> Fk_IdSector { get; set; }
-        public Nullable<int> Fk_IdTipoInstitucion { get; set; }
+        public int IdRelCargoUnidadNeg { get; set; }
+        public int Fk_IdCargo { get; set; }
+        public int Fk_IdUnidadNegocio { get; set; }
         public bool EstatusRegistro { get; set; }
         public int Fk_IdUsuarioRegistro { get; set; }
         public System.DateTime FechaRegistro { get; set; }
     
-        public virtual Cat_NatJuridica Cat_NatJuridica { get; set; }
-        public virtual Cat_Sector Cat_Sector { get; set; }
-        public virtual Cat_TipoInstitucion Cat_TipoInstitucion { get; set; }
+        public virtual Cat_Cargo Cat_Cargo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cat_TraductorInstitucion1> Cat_TraductorInstitucion1 { get; set; }
+        public virtual ICollection<Cat_Emisor> Cat_Emisor { get; set; }
+        public virtual Cat_UnidadNegocio Cat_UnidadNegocio { get; set; }
     }
 }

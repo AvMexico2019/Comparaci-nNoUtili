@@ -12,19 +12,12 @@ namespace ComparaciónNoUtili
     using System;
     using System.Collections.Generic;
     
-    public partial class Cat_DiasInhabiles
+    public partial class Cat_TipoTelefono
     {
-        public int Id_DiaInhabil { get; set; }
-        public System.DateTime Alta { get; set; }
-        public Nullable<int> IdUsuario { get; set; }
-        public int Dia { get; set; }
-        public int Mes { get; set; }
-        public Nullable<int> Anio { get; set; }
-        public int Fk_IdCalendario { get; set; }
+        public int IdTipoTelefono { get; set; }
+        public string DescripcionTipoTelefono { get; set; }
         public bool EstatusRegistro { get; set; }
         public int Fk_IdUsuarioRegistro { get; set; }
         public System.DateTime FechaRegistro { get; set; }
-    
-        public virtual Cat_Calendario Cat_Calendario { get; set; }
     }
 }

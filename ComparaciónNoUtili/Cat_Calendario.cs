@@ -12,27 +12,23 @@ namespace ComparaciónNoUtili
     using System;
     using System.Collections.Generic;
     
-    public partial class Cat_Institucion
+    public partial class Cat_Calendario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cat_Institucion()
+        public Cat_Calendario()
         {
-            this.Cat_TraductorInstitucion1 = new HashSet<Cat_TraductorInstitucion1>();
+            this.Cat_DiasInhabiles = new HashSet<Cat_DiasInhabiles>();
         }
     
-        public int IdInstitucion { get; set; }
-        public string DescripcionInstitucion { get; set; }
-        public Nullable<int> Fk_IdNatJuridica { get; set; }
-        public Nullable<int> Fk_IdSector { get; set; }
-        public Nullable<int> Fk_IdTipoInstitucion { get; set; }
+        public int Id_Calendario { get; set; }
+        public string DescripcionCalendario { get; set; }
+        public bool LaboraSabado { get; set; }
+        public bool LaboraDomingo { get; set; }
         public bool EstatusRegistro { get; set; }
         public int Fk_IdUsuarioRegistro { get; set; }
         public System.DateTime FechaRegistro { get; set; }
     
-        public virtual Cat_NatJuridica Cat_NatJuridica { get; set; }
-        public virtual Cat_Sector Cat_Sector { get; set; }
-        public virtual Cat_TipoInstitucion Cat_TipoInstitucion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cat_TraductorInstitucion1> Cat_TraductorInstitucion1 { get; set; }
+        public virtual ICollection<Cat_DiasInhabiles> Cat_DiasInhabiles { get; set; }
     }
 }

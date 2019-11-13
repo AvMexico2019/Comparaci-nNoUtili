@@ -4,6 +4,8 @@ using System.Threading;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
+using System.Text;
+using System.Globalization;
 
 namespace ComparaciónNoUtili
 {
@@ -65,7 +67,7 @@ namespace ComparaciónNoUtili
 
             // ctx.Database.Log = LOGFile.Write; // produce demasiado texto
 
-            ctx.NoUtiliAuditoria2019P();
+            //ctx.NoUtiliAuditoria2019P();
             LOGFile.WriteLine("Regeneramos la tabla NoUtili");
 
             LOGFile.WriteLine("\nCS " + ConfigurationManager.ConnectionStrings["ArrendamientoInmuebleEntities"]);
@@ -264,7 +266,53 @@ namespace ComparaciónNoUtili
             DB_CAT_NuevaEntities ctx = new DB_CAT_NuevaEntities();
             var Pais = (from pay in ctx.Cat_Pais where FkIdPais == pay.IdPais select pay);
             foreach (var p in Pais) return p.DescripcionPais;
-            return null;
+            return "";
+        }
+
+        static public string GetEstado(int FkIdEstado)
+        {
+            DB_CAT_NuevaEntities ctx = new DB_CAT_NuevaEntities();
+            var Pais = (from pay in ctx.Cat_Estado where FkIdEstado == pay.IdEstado select pay);
+            foreach (var p in Pais) return p.DescripcionEstado;
+            return "";
+        }
+
+        static public string GetMunicipio(int FkIdMunicipio)
+        {
+            DB_CAT_NuevaEntities ctx = new DB_CAT_NuevaEntities();
+            var Pais = (from pay in ctx.Cat_Municipio where FkIdMunicipio == pay.IdMunicipio select pay);
+            foreach (var p in Pais) return p.DescripcionMunicipio;
+            return "";
+        }
+
+        static public string GetTipoInmueble(int FkIdTipoInmueble)
+        {
+            DB_CAT_NuevaEntities ctx = new DB_CAT_NuevaEntities();
+            var Pais = (from pay in ctx.Cat_TipoInmueble where FkIdTipoInmueble == pay.IdTipoInmueble select pay);
+            foreach (var p in Pais) return p.DescripcionTipoInm;
+            return "";
+        }
+
+        static public string GetTipoUsoInmueble(int FkIdTipoUsoInmueble)
+        {
+            DB_CAT_NuevaEntities ctx = new DB_CAT_NuevaEntities();
+            var Pais = (from pay in ctx.Cat_TipoUsoInmueble where FkIdTipoUsoInmueble == pay.IdTipoUsoInm select pay);
+            foreach (var p in Pais) return p.DescripcionTipoUsoInm;
+            return "";
+        }
+
+        static public string EDS(string valor)
+        {
+            if (IsExcelNull(valor))
+                return "";
+            else
+                return System.Text.RegularExpressions.Regex.Replace(valor, @"\s+", " ").Trim().ToLower() ;
+        }
+
+        static public string HEXAString(string valor)
+        {
+            byte[] ba = Encoding.Default.GetBytes(valor);
+            return BitConverter.ToString(ba).Replace("-","").ToUpper();
         }
 
         static public string CleanExcelString(string input)
@@ -346,6 +394,21 @@ namespace ComparaciónNoUtili
             if (String.IsNullOrEmpty(valor) || valor.Equals("NULL") || String.IsNullOrWhiteSpace(valor)) return true; else return false;
         }
 
+        static public bool Result(string linein, out string line, bool comp, string msg)
+        {
+            line = linein;
+            if (comp)
+            {
+                line += "1";
+                return true;
+            }
+            else
+            {
+                if (msg.Equals("")) line += "0"; else line += msg;
+                return false;
+            }
+        }
+
         static void BusquedaVigentesEnReporteTotal()
         {
             ArrendamientoInmuebleEntities ctx = new ArrendamientoInmuebleEntities();
@@ -355,71 +418,92 @@ namespace ComparaciónNoUtili
             var ReporteTotal = ctx.ReporteTotal;
             string SQLqqsaved = @"D:\temp\SQLQQSAVED.txt";
             string LOGqqsaved = @"D:\temp\LOGqqsaved.txt";
+            string line;
+            int registrosErroneos = 1;
+            int registros = 0;
 
             if (File.Exists(SQLqqsaved)) File.Delete(SQLqqsaved);
             StreamWriter SqlFile = new StreamWriter(SQLqqsaved);
 
             if (File.Exists(LOGqqsaved)) File.Delete(LOGqqsaved);
             StreamWriter LOGFile = new StreamWriter(LOGqqsaved);
-
             LOGFile.WriteLine("\nCS " + ConfigurationManager.ConnectionStrings["ArrendamientoInmuebleEntities"]);
-
-            int RegVigente = 0;
+            
             bool RegistrosIguales = true;
             foreach(var vigente in Vigentes)
             {
-                LOGFile.Write("{000000}-",++RegVigente);
+                registros++;
+                line = ">" + vigente.ID.ToString() + "/" + vigente.FolioContrato.ToString() + "<";
                 var totalEncontrados = (from total in ReporteTotal
                                         where total.FolioContrato == vigente.FolioContrato
                                         select total);
                 foreach(var total in totalEncontrados)
                 {
-                    if (vigente.FolioContrato == total.FolioContrato) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if (vigente.Propietario.Equals(total.Propietario)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if (vigente.Responsable.Equals(total.Responsable)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if (vigente.Promovente.Equals(total.Promovente)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    RegistrosIguales = true;
+                                                        //  1
+                    RegistrosIguales &= Result(line, out line, vigente.FolioContrato == total.FolioContrato, "");
+                    RegistrosIguales &= Result(line, out line, EDS(vigente.Propietario).Equals(EDS(total.Propietario)), "");
+                    RegistrosIguales &= Result(line, out line, EDS(vigente.Responsable).Equals(EDS(total.Responsable)), "");
+                    RegistrosIguales &= Result(line, out line, EDS(vigente.Promovente).Equals(EDS(total.Promovente)), "");
                     string pais = GetPais(total.FkIdPais).ToUpper();
-                    if (vigente.Pais.Equals(pais)) LOGFile.Write("1"); else LOGFile.Write("0"); // no letra y numero
-                    //if (vigente.Estado + "-" + total.Estado) LOGFile.Write("1"); else LOGFile.Write("0"); // total vacio
-                    if (!IsExcelNull(total.Estado)) LOGFile.Write("Edo no vacio-");
-                    //if (vigente.Municipio + "-" + total.Municipio) LOGFile.Write("1"); else LOGFile.Write("0"); // total vacio
-                    if (!IsExcelNull(total.Municipio)) LOGFile.Write("Municipio no vacio");
-                    if (vigente.Colonia.Equals(total.Colonia)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if (vigente.Calle.Equals(total.Calle)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if (vigente.CodigoPostal.Equals(total.CodigoPostal)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((IsExcelNull(vigente.NumInterior) && IsExcelNull(total.NumInterior)) || vigente.NumInterior.Equals(total.NumInterior)) LOGFile.Write("1"); else LOGFile.Write("0"); // sin info los dos
-                    if (vigente.NumExterior.Equals(total.NumExterior)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((IsExcelNull(vigente.Ciudad) && IsExcelNull(total.Ciudad)) || vigente.Ciudad.Equals(total.Ciudad)) LOGFile.Write("1"); else LOGFile.Write("0"); // nulo blanco
-                    if (vigente.OtroUsoInmueble.Equals(total.OtroUsoInmueble)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if (vigente.TipoContrato.Equals(total.TipoContrato)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((IsExcelNull(vigente.TipoOcupacion) && IsExcelNull(total.TipoOcupacion)) || vigente.TipoOcupacion.Equals(total.TipoOcupacion)) LOGFile.Write("1"); else LOGFile.Write("0"); // vacio NULL
-                    if (vigente.DescripcionTipoArrendamiento.Equals(total.DescripcionTipoArrendamiento)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    //if (vigente.TipoInmueble + "-" + total.TipoInmueble) LOGFile.Write("1"); else LOGFile.Write("0"); // total sin info
-                    if (!IsExcelNull(total.TipoInmueble)) LOGFile.Write("TipoInmueble no vacio");
-                    //if (vigente.TipoUsoInmueble + "-" + total.TipoUsoInmueble) LOGFile.Write("1"); else LOGFile.Write("0"); // total sin info
-                    if (!IsExcelNull(total.TipoUsoInmueble)) LOGFile.Write("TipoUsoInmueble no vacio");
-                    if (vigente.AreaOcupadaM2 == total.AreaOcupadaM2) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((decimal)vigente.MontoPagoMensual == total.MontoPagoMensual) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((decimal)vigente.CuotaMantenimiento == total.CuotaMantenimiento) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((decimal)vigente.MontoPagoPorCajonesEstacionamiento == total.MontoPagoPorCajonesEstacionamiento) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((decimal)vigente.MontoDictaminado == total.MontoDictaminado) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((decimal)vigente.RentaUnitariaMensual == total.RentaUnitariaMensual) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((decimal)vigente.MontoAnterior == total.MontoAnterior) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if (vigente.SMOI == total.SMOI) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if (vigente.TablaSmoi.Equals(total.TablaSMOI)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((DateTime)vigente.Fecha == Convert.ToDateTime(total.Fecha)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((DateTime)vigente.FechaContratoDesde == Convert.ToDateTime(total.FechaContratoDesde)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((DateTime)vigente.FechaContratoHasta == Convert.ToDateTime(total.FechaCntratoHasta)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if ((DateTime)vigente.FechaDictamen == Convert.ToDateTime(total.FechaDictamen)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if (vigente.DescripcionTipoContratacion.Equals(total.DescripcionTipoContratacion)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if (vigente.ResultadoOpinion.Equals(total.ResultadosOpinion)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    if (vigente.RIUF.Equals(total.RIUF)) LOGFile.Write("1"); else LOGFile.Write("0");
-                    LOGFile.WriteLine();
+                                                        //  5
+                    RegistrosIguales &= Result(line, out line, vigente.Pais.Equals(pais), ""); // no letra y numero
+                    //if (vigente.Estado + "-" + total.Estado); // total vacio
+                    string estado = GetEstado((int)total.Fk_IdEstado).ToUpper();
+                    RegistrosIguales &= Result(line, out line, EDS(vigente.Estado).Equals(EDS(estado)) || IsExcelNull(estado), "-Edo no vacio-");
+                    //if (vigente.Municipio + "-" + total.Municipio); // total vacio
+                    string municipio = GetMunicipio((int)total.Fk_IdMunicipio).ToUpper();
+                    RegistrosIguales &= Result(line, out line, EDS(vigente.Municipio).Equals(EDS(municipio)) || IsExcelNull(municipio), "-Municipio no vacio-");
+                    RegistrosIguales &= Result(line, out line, EDS(vigente.Colonia).Equals(EDS(total.Colonia)) || IsExcelNull(total.Colonia), "");
+                    RegistrosIguales &= Result(line, out line, EDS(vigente.Calle).Equals(EDS(total.Calle)), "");
+                                                        //  10
+                    RegistrosIguales &= Result(line, out line, vigente.CodigoPostal.Equals(total.CodigoPostal), "");
+                    RegistrosIguales &= Result(line, out line, (IsExcelNull(vigente.NumInterior) && IsExcelNull(total.NumInterior)) || vigente.NumInterior.Equals(total.NumInterior), ""); // sin info los dos
+                    RegistrosIguales &= Result(line, out line, vigente.NumExterior.Equals(total.NumExterior), "");
+                    RegistrosIguales &= Result(line, out line, (IsExcelNull(vigente.Ciudad) && IsExcelNull(total.Ciudad)) || vigente.Ciudad.Equals(total.Ciudad), ""); // nulo blanco
+                                // O J  O
+                    // Otro uso inmueble: preguntar si es importante o quen gana o como se define
+                    RegistrosIguales &= Result(line, out line, vigente.OtroUsoInmueble.Equals(total.OtroUsoInmueble) || true, "");
+                    
+                    //  15
+                    RegistrosIguales &= Result(line, out line, vigente.TipoContrato.Equals(total.TipoContrato), "");
+                    RegistrosIguales &= Result(line, out line, (IsExcelNull(vigente.TipoOcupacion) && IsExcelNull(total.TipoOcupacion)) || vigente.TipoOcupacion.Equals(total.TipoOcupacion), ""); // vacio NULL
+                    RegistrosIguales &= Result(line, out line, vigente.DescripcionTipoArrendamiento.Equals(total.DescripcionTipoArrendamiento), "");
+                    //if (vigente.TipoInmueble + "-" + total.TipoInmueble); // total sin info
+                    string tipoInmueble = GetTipoInmueble((int)total.Fk_IdTipoInmueble).ToString();
+                    RegistrosIguales &= Result(line, out line, EDS(vigente.TipoInmueble).Equals(EDS(tipoInmueble)), "-TipoInmueble no vacio-");
+                    //if (vigente.TipoUsoInmueble + "-" + total.TipoUsoInmueble); // total sin info
+                    string tipoUsoInmueble = GetTipoUsoInmueble((int)total.Fk_IdTipoUsoInmueble).ToString();
+
+                    RegistrosIguales &= Result(line, out line, EDS(vigente.TipoUsoInmueble).Equals(EDS(tipoUsoInmueble)) || IsExcelNull(tipoUsoInmueble), "-TipoUsoInmueble no vacio-");
+                                                        //  20
+                    RegistrosIguales &= Result(line, out line, vigente.AreaOcupadaM2 == total.AreaOcupadaM2, "");
+                    RegistrosIguales &= Result(line, out line, (decimal)vigente.MontoPagoMensual == total.MontoPagoMensual, "");
+                    RegistrosIguales &= Result(line, out line, (decimal)vigente.CuotaMantenimiento == total.CuotaMantenimiento, "");
+                    RegistrosIguales &= Result(line, out line, (decimal)vigente.MontoPagoPorCajonesEstacionamiento == total.MontoPagoPorCajonesEstacionamiento, "");
+                    RegistrosIguales &= Result(line, out line, (decimal)vigente.MontoDictaminado == total.MontoDictaminado, "");
+                                                        //  25
+                    RegistrosIguales &= Result(line, out line, (decimal)vigente.RentaUnitariaMensual == total.RentaUnitariaMensual, "");
+                    RegistrosIguales &= Result(line, out line, (decimal)vigente.MontoAnterior == total.MontoAnterior, "");
+                    RegistrosIguales &= Result(line, out line, vigente.SMOI == total.SMOI, "");
+                    RegistrosIguales &= Result(line, out line, vigente.TablaSmoi.Equals(total.TablaSMOI), "");
+                    RegistrosIguales &= Result(line, out line, (DateTime)vigente.Fecha == Convert.ToDateTime(total.Fecha), "");
+                                                        //  30
+                    RegistrosIguales &= Result(line, out line, (DateTime)vigente.FechaContratoDesde == Convert.ToDateTime(total.FechaContratoDesde), "");
+                    RegistrosIguales &= Result(line, out line, (DateTime)vigente.FechaContratoHasta == Convert.ToDateTime(total.FechaCntratoHasta), "");
+                    RegistrosIguales &= Result(line, out line, (DateTime)vigente.FechaDictamen == Convert.ToDateTime(total.FechaDictamen), "");
+                    RegistrosIguales &= Result(line, out line, (IsExcelNull(vigente.DescripcionTipoContratacion) && IsExcelNull(total.DescripcionTipoContratacion)) || EDS(vigente.DescripcionTipoContratacion).Equals(EDS(total.DescripcionTipoContratacion)), "");
+                    RegistrosIguales &= Result(line, out line, vigente.ResultadoOpinion.Equals(total.ResultadosOpinion), "");
+                                                        //  35
+                    RegistrosIguales &= Result(line, out line, vigente.RIUF.Equals(total.RIUF), "");
+                    if (!RegistrosIguales) 
+                        LOGFile.WriteLine((registrosErroneos++).ToString() + line);
                 }
             }
             
-            LOGFile.WriteLine("Registros NoUtili modificados ");
-            LOGFile.WriteLine("Contratos sin Inmueble ");
+            LOGFile.WriteLine("Registros erroneos " + (registrosErroneos - 1).ToString());
+            Console.WriteLine("Registros Erroneo " + (registrosErroneos - 1).ToString());
+            Console.WriteLine("Registros " + (registros).ToString());
             SqlFile.Close();
             LOGFile.Close();
         }
@@ -428,7 +512,19 @@ namespace ComparaciónNoUtili
         {
             //comparacionNoUtili();
             //BusquedaVigentes();
-           
+            //Console.WriteLine(CultureInfo.CurrentCulture.Name);
+            //Console.WriteLine("-" + HEXAString("abcdefghijklmnopqrstuvwxyz") + "-");
+            //Console.WriteLine("-" + HEXAString("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + "-");
+            //Console.WriteLine("-" + HEXAString("ÁÉÍÓÚÜÑ") + "-");
+            //Console.WriteLine("-" + HEXAString("áéíóúüñ") + "-");
+            //Console.WriteLine("-" + HEXAString("0123456789|°¬\"#$%&/()=?'\\¡¿´¨*+~[{^]}`<>,;.:-_") + "-");
+            //Console.ReadKey();
+
+            //string a = "AVENIDA CONSTITUYENTES DE 1975";
+            //int al = a.Length;
+            //string b = EDS(" AVENIDA CONSTITUYENTES DE 1975");
+            //int bl = b.Length;
+            //bool c = a.Equals(b);
             BusquedaVigentesEnReporteTotal();
 
            

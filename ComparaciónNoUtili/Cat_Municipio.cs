@@ -18,6 +18,7 @@ namespace ComparaciónNoUtili
         public Cat_Municipio()
         {
             this.Cat_CodigoPostal = new HashSet<Cat_CodigoPostal>();
+            this.Cat_Localidades = new HashSet<Cat_Localidades>();
         }
     
         public int IdMunicipio { get; set; }
@@ -30,5 +31,8 @@ namespace ComparaciónNoUtili
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cat_CodigoPostal> Cat_CodigoPostal { get; set; }
+        public virtual Cat_Estado Cat_Estado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cat_Localidades> Cat_Localidades { get; set; }
     }
 }

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="08fd35ebe2bb4f74b39d20c6bb6437c8" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.BitacoraSistema" Width="1.5" PointX="13.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_AdmonCarretera" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Asentamiento" Width="1.5" PointX="11.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Bancos" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Calendario" Width="1.5" PointX="13.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Cargo" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_CatalogadoPor" Width="1.5" PointX="15.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_CategoriaGeneral" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_ClasificacionReligiosa" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_CodigoPostal" Width="1.5" PointX="9.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_ComponenteEspacial" Width="1.5" PointX="2.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_CRITERIOS" Width="1.5" PointX="16.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_DerechoTransito" Width="1.5" PointX="15.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_DiasInhabiles" Width="1.5" PointX="16" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_DoctoAlterno" Width="1.5" PointX="4.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Emisor" Width="1.5" PointX="12.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Estado" Width="1.5" PointX="5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_EstadoCivil" Width="1.5" PointX="6.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Genero" Width="1.5" PointX="11.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Institucion" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_InstitucionExpide" Width="1.5" PointX="11.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_LeyendaAnual" Width="1.5" PointX="17.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Localidades" Width="1.5" PointX="9.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_MargenCamino" Width="1.5" PointX="17.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Mes" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Municipio" Width="1.5" PointX="7.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_NatJuridica" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_NivelGobierno" Width="1.5" PointX="18.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Pais" Width="1.5" PointX="2.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Parametro" Width="1.5" PointX="18.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_ParametroHistorico" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Periodo" Width="1.5" PointX="18.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Procedencia" Width="1.5" PointX="19.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Sector" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Supuestos" Width="1.5" PointX="13.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TerminoGenCamino" Width="1.5" PointX="15.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TIPO_VALOR" Width="1.5" PointX="19.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoAsenta" Width="1.5" PointX="7.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoAsentamiento" Width="1.5" PointX="9.5" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoDependencia" Width="1.5" PointX="17.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoDocumentoAdjunto" Width="1.5" PointX="19.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoIdentificacion" Width="1.5" PointX="11.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoInmueble" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoInstitucion" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoMoneda" Width="1.5" PointX="2.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoNotario" Width="1.5" PointX="20.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoPatente" Width="1.5" PointX="4.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoPersona" Width="1.5" PointX="20.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoProcedimiento" Width="1.5" PointX="20.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoRecepcion" Width="1.5" PointX="9.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TiposOrganizacion" Width="1.5" PointX="21.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoTelefono" Width="1.5" PointX="21.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoUsoInmueble" Width="1.5" PointX="21.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoVialidad" Width="1.5" PointX="21.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TituloPersona" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.CAT_TRIMESTRE" Width="1.5" PointX="22.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_UnidadMedida" Width="1.5" PointX="22.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_UnidadNegocio" Width="1.5" PointX="7.75" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_UsoEspecifico" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_UsoGenerico" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Zona" Width="1.5" PointX="7.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Rel_TipoIdentificacionInstExpide" Width="1.5" PointX="14" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.RelCargoUnidadNeg" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.sysdiagrams" Width="1.5" PointX="22.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_Institucion_20171127" Width="1.5" PointX="11.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoDomicilio" Width="1.5" PointX="13.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TipoUsuario" Width="1.5" PointX="15.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TraductorInstitucion1" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Cat_TraductorSector1" Width="1.5" PointX="17.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CAT_NuevaModel.Temp_tipoDoctoAdjunto" Width="1.5" PointX="0.75" PointY="23.75" IsExpanded="true" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.FK_Cat_Localidad_Cat_Asentamiento" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.FK_Cat_TipoAsentamiento_Cat_Asentamiento" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.FK_Incidencias_Cat_EstatusGenerales_1" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.FK_Cat_Cargo_RelCargoUnidadNeg" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.Fk_IdEstado" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.Fk_IdMunicipio1" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.Fk_IdTipoAsenta" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.Fk_IdZona" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.FK_Cat_UnidadNegocio_Cat_Emisor" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.Fk_IdEstado1" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.Fk_IdPais" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.Fk_IdNatJuridica" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.Fk_IdSector" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.Fk_IdTipoInstitucion" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.IdInstitucionActual" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.FK_IdInstExpideIns" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.Fk_IdMunicipio" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.FK_IdTipoIdentificacionExp" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.FK_Cat_UnidadNegocio_RelCargoUnidadNeg" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CAT_NuevaModel.Fk_IdUsoGenerico_UE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

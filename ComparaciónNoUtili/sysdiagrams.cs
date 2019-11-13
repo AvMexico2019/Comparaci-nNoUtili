@@ -12,15 +12,12 @@ namespace ComparaciónNoUtili
     using System;
     using System.Collections.Generic;
     
-    public partial class Cat_Parametro
+    public partial class sysdiagrams
     {
-        public int IdParametro { get; set; }
-        public string NombreParametro { get; set; }
-        public string DescripcionParametro { get; set; }
-        public string ValorParametro { get; set; }
-        public string ValorAdicionalParametro { get; set; }
-        public bool EstatusRegistro { get; set; }
-        public int Fk_IdUsuarioRegistro { get; set; }
-        public System.DateTime FechaRegistro { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
