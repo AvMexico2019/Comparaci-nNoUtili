@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bfe3483139214e249772d1e9f147bca8" Name="Diagram1">
+      <Diagram DiagramId="cdad7234aa714c8f8de33b2f0ced168f" Name="Diagram1">
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.AplicacionConcepto" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.AreaPrioridad" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
@@ -41,25 +41,29 @@
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.JustipreciacionArrto" Width="1.5" PointX="10.5" PointY="23" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.JustipreciacionExt" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.Movimiento" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.NoUtiliAuditoria2019TProduccion" Width="1.5" PointX="17.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.NoUtiliAuditoria2019T" Width="1.5" PointX="17.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.NoUtiliAuditoria2019TProduccion" Width="1.5" PointX="17.75" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.PersonaReferencia" Width="1.5" PointX="13.5" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.PlazasInmueble" Width="1.5" PointX="17.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.PlazasInmueble" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.Rel_ConceptoRespValor" Width="1.5" PointX="6" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.ReporteTotal" Width="1.5" PointX="19.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.Respuesta" Width="1.5" PointX="3.75" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.RespuestaConcepto" Width="1.5" PointX="11.25" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.RIUF" Width="1.5" PointX="1.5" PointY="36.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.SelloDigital" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.Cat_CampoReporte" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.Cat_Documento" Width="1.5" PointX="19.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.Cat_CampoReporte" Width="1.5" PointX="19.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.Cat_Documento" Width="1.5" PointX="21.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendamientoInmuebleModel.dbcatnueva_instituciones" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.InmuebleFebreroSinRIUF" Width="1.5" PointX="19.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.NoUtiliAuditoria2019T" Width="1.5" PointX="19.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.PlazasInmueble_20171205" Width="1.5" PointX="21.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.PlazasInmuebleMod" Width="1.5" PointX="21.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.RepRFI_RIUF" Width="1.5" PointX="21.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.TRADUCTOR_cat" Width="1.5" PointX="12.75" PointY="21.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.TraductorRUSP_INST" Width="1.5" PointX="21.75" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.TraductorRUSP_Sector" Width="1.5" PointX="21.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.InmuebleFebreroSinRIUF" Width="1.5" PointX="21.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.PlazasInmueble_20171205" Width="1.5" PointX="21.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.PlazasInmuebleMod" Width="1.5" PointX="12.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.RepRFI_RIUF" Width="1.5" PointX="21.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.TRADUCTOR_cat" Width="1.5" PointX="19.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.TraductorRUSP_INST" Width="1.5" PointX="21.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.TraductorRUSP_Sector" Width="1.5" PointX="14.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.VW_DWH_CONTRATORIUF" Width="1.5" PointX="23.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.VW_DWH_RIUF" Width="1.5" PointX="23.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendamientoInmuebleModel.Vw_QlikContratoArren" Width="1.5" PointX="23.75" PointY="10.75" IsExpanded="true" />
         <AssociationConnector Association="ArrendamientoInmuebleModel.FK_AplicacionConcepto_Cat_Tema" ManuallyRouted="false" />
         <AssociationConnector Association="ArrendamientoInmuebleModel.FK_AplicacionConcepto_InmuebleArrendamiento" ManuallyRouted="false" />
         <AssociationConnector Association="ArrendamientoInmuebleModel.FK_ContratoArrto_AplicacionConcepto" ManuallyRouted="false" />

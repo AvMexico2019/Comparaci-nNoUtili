@@ -64,8 +64,17 @@
     <Compile Include="BitacoraSistema.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
+    <Compile Include="Cat_Bancos.cs">
+      <DependentUpon>DBCATNUEVA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Cat_CampoReporte.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cat_CodigoPostal.cs">
+      <DependentUpon>DBCATNUEVA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cat_DiasInhabiles.cs">
+      <DependentUpon>DBCATNUEVA.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Documento.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
@@ -73,11 +82,23 @@
     <Compile Include="Cat_Indicador.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
+    <Compile Include="Cat_Institucion.cs">
+      <DependentUpon>DBCATNUEVA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Cat_InstitucionContratosDBCATNueva.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_InstitucionContratosHistorico.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cat_Mes.cs">
+      <DependentUpon>DBCATNUEVA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cat_Municipio.cs">
+      <DependentUpon>DBCATNUEVA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cat_Pais.cs">
+      <DependentUpon>DBCATNUEVA.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Parametro.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
@@ -138,6 +159,21 @@
     </Compile>
     <Compile Include="DatosAdicionalesInmueble.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBCATNUEVA.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBCATNUEVA.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBCATNUEVA.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBCATNUEVA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBCATNUEVA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBCATNUEVA.edmx</DependentUpon>
     </Compile>
     <Compile Include="dbcatnueva_instituciones.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
@@ -213,6 +249,9 @@
     <Compile Include="Rel_ConceptoRespValor.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReporteTotal.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
     <Compile Include="RepRFI_RIUF.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
@@ -228,6 +267,84 @@
     <Compile Include="SelloDigital.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
+    <Compile Include="SPLIT_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuConsultadeTodoslosContratos_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuInsertInmueble_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuObtenerAcuseCuerpoSAEF_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuObtenerAcuseHeaderSelloSAEF_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuObtenerEmisionOpinion_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuObtenerFundamentoLegalXCptoNumOrden_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuObtenerInmueblesConvenioModificatorio_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuObtenerSMOIfolio_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuPaginandoSelectTabla_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectAcuseContrato_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectAcuseEmisionOpinionXIdFolio_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectAcuseSMOI_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectConceptosXResponderSMOI_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectConceptosXResponderTema_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectContratoArrto_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectContratosHistoricoXInstitucionEdoMpo_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectDatosAPartirDelFolioContrato_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectEstadoMpoXIdInmuebleArrto_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectExcepcionNormativaContratoArrto_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectInmuebleArrtoXId_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectInmuebles_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectMvtosEmisionOpinionParaInmueblesArrto_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectSolicitudesEmisionOpinionEmitidas_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectSolicitudesSMOIEmitidas_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectTotalSMOIxFolioOpinion_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
     <Compile Include="TraductorRUSP_INST.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
@@ -237,6 +354,18 @@
     <Compile Include="TRADUCTOR_cat.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_ActualizarRIUF_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_DWH_CONTRATORIUF.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_DWH_RIUF.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vw_QlikContratoArren.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ModelosContrato.edmx">
@@ -244,6 +373,13 @@
       <LastGenOutput>ModelosContrato.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="App.Config" />
+    <EntityDeploy Include="DBCATNUEVA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DBCATNUEVA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DBCATNUEVA.edmx.diagram">
+      <DependentUpon>DBCATNUEVA.edmx</DependentUpon>
+    </None>
     <None Include="ModelosContrato.edmx.diagram">
       <DependentUpon>ModelosContrato.edmx</DependentUpon>
     </None>
@@ -253,6 +389,16 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DBCATNUEVA.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBCATNUEVA.edmx</DependentUpon>
+      <LastGenOutput>DBCATNUEVA.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DBCATNUEVA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBCATNUEVA.edmx</DependentUpon>
+      <LastGenOutput>DBCATNUEVA.cs</LastGenOutput>
+    </Content>
     <Content Include="ModelosContrato.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelosContrato.edmx</DependentUpon>
@@ -263,6 +409,8 @@
       <DependentUpon>ModelosContrato.edmx</DependentUpon>
       <LastGenOutput>ModelosContrato.cs</LastGenOutput>
     </Content>
+    <Content Include="SQL\Comparacion ReporteTotalVigentes.sql" />
+    <Content Include="SQL\CreaTablaReporteTotal.sql" />
     <Content Include="SQL\Create_Noutili.sql" />
     <Content Include="SQL\spuNoUtili.sql" />
   </ItemGroup>

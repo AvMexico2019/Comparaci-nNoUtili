@@ -7,7 +7,7 @@ using System.IO;
 
 namespace ComparaciónNoUtili
 {
-    class Program
+    public class Program
     {
         static void comparacionNoUtili()
         {
@@ -259,10 +259,177 @@ namespace ComparaciónNoUtili
             LOGFile.Close(); 
         }
 
+        static public string GetPais(int FkIdPais)
+        {
+            DB_CAT_NuevaEntities ctx = new DB_CAT_NuevaEntities();
+            var Pais = (from pay in ctx.Cat_Pais where FkIdPais == pay.IdPais select pay);
+            foreach (var p in Pais) return p.DescripcionPais;
+            return null;
+        }
+
+        static public string CleanExcelString(string input)
+        {
+            char[] QuitaChars = { '"', ' ', '\\' };
+            input = input.Trim(QuitaChars);
+            int pos;
+            while ((pos = input.IndexOf(',')) >= 0)
+            {
+                input = input.Remove(pos, 1);
+            }
+            while ((pos = input.IndexOf('\\')) >= 0)
+            {
+                input = input.Remove(pos, 1);
+            }
+            while ((pos = input.IndexOf('$')) >= 0)
+            {
+                input = input.Remove(pos, 1);
+            }
+            while ((pos = input.IndexOf(' ')) >= 0)
+            {
+                input = input.Remove(pos, 1);
+            }
+            while ((pos = input.IndexOf('"')) >= 0)
+            {
+                input = input.Remove(pos, 1);
+            }
+            return input;
+        }
+
+        static public Decimal DineroADecimal(int index, string monto)
+        {
+            if (IsExcelNull(monto))
+            {
+                return (Decimal)0.0;
+            }
+            else
+            {
+                Console.WriteLine("-" + index + "-" + monto);
+                monto = CleanExcelString(monto);
+                Console.WriteLine("--" + monto);
+                return Convert.ToDecimal(monto);
+            }
+        }
+
+        static public Decimal ExcelNumeroADecimal(int index, string monto)
+        {
+            if (IsExcelNull(monto))
+            {
+                return (Decimal)0.0;
+            }
+            else
+            {
+                Console.WriteLine("-" + index + "-" + monto);
+                monto = CleanExcelString(monto);
+                Console.WriteLine("--" + monto);
+                return Convert.ToDecimal(monto);
+            }
+        }
+
+        static public Double ExcelNumeroADouble(int index, string monto)
+        {
+            if (IsExcelNull(monto))
+            {
+                return (Double)0.0;
+            }
+            else
+            {
+                Console.WriteLine("-" + index + "-" + monto);
+                monto = CleanExcelString(monto);
+                Console.WriteLine("--" + monto);
+                return Convert.ToDouble(monto);
+            }
+        }
+
+
+        static public bool IsExcelNull(string valor)
+        {
+            if (String.IsNullOrEmpty(valor) || valor.Equals("NULL") || String.IsNullOrWhiteSpace(valor)) return true; else return false;
+        }
+
+        static void BusquedaVigentesEnReporteTotal()
+        {
+            ArrendamientoInmuebleEntities ctx = new ArrendamientoInmuebleEntities();
+            var Contratos = ctx.ContratoArrto;
+            var Vigentes = ctx.ContratosVigentes;
+            var Inmuebles = ctx.InmuebleArrendamiento;
+            var ReporteTotal = ctx.ReporteTotal;
+            string SQLqqsaved = @"D:\temp\SQLQQSAVED.txt";
+            string LOGqqsaved = @"D:\temp\LOGqqsaved.txt";
+
+            if (File.Exists(SQLqqsaved)) File.Delete(SQLqqsaved);
+            StreamWriter SqlFile = new StreamWriter(SQLqqsaved);
+
+            if (File.Exists(LOGqqsaved)) File.Delete(LOGqqsaved);
+            StreamWriter LOGFile = new StreamWriter(LOGqqsaved);
+
+            LOGFile.WriteLine("\nCS " + ConfigurationManager.ConnectionStrings["ArrendamientoInmuebleEntities"]);
+
+            int RegVigente = 0;
+            bool RegistrosIguales = true;
+            foreach(var vigente in Vigentes)
+            {
+                LOGFile.Write("{000000}-",++RegVigente);
+                var totalEncontrados = (from total in ReporteTotal
+                                        where total.FolioContrato == vigente.FolioContrato
+                                        select total);
+                foreach(var total in totalEncontrados)
+                {
+                    if (vigente.FolioContrato == total.FolioContrato) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if (vigente.Propietario.Equals(total.Propietario)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if (vigente.Responsable.Equals(total.Responsable)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if (vigente.Promovente.Equals(total.Promovente)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    string pais = GetPais(total.FkIdPais).ToUpper();
+                    if (vigente.Pais.Equals(pais)) LOGFile.Write("1"); else LOGFile.Write("0"); // no letra y numero
+                    //if (vigente.Estado + "-" + total.Estado) LOGFile.Write("1"); else LOGFile.Write("0"); // total vacio
+                    if (!IsExcelNull(total.Estado)) LOGFile.Write("Edo no vacio-");
+                    //if (vigente.Municipio + "-" + total.Municipio) LOGFile.Write("1"); else LOGFile.Write("0"); // total vacio
+                    if (!IsExcelNull(total.Municipio)) LOGFile.Write("Municipio no vacio");
+                    if (vigente.Colonia.Equals(total.Colonia)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if (vigente.Calle.Equals(total.Calle)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if (vigente.CodigoPostal.Equals(total.CodigoPostal)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((IsExcelNull(vigente.NumInterior) && IsExcelNull(total.NumInterior)) || vigente.NumInterior.Equals(total.NumInterior)) LOGFile.Write("1"); else LOGFile.Write("0"); // sin info los dos
+                    if (vigente.NumExterior.Equals(total.NumExterior)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((IsExcelNull(vigente.Ciudad) && IsExcelNull(total.Ciudad)) || vigente.Ciudad.Equals(total.Ciudad)) LOGFile.Write("1"); else LOGFile.Write("0"); // nulo blanco
+                    if (vigente.OtroUsoInmueble.Equals(total.OtroUsoInmueble)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if (vigente.TipoContrato.Equals(total.TipoContrato)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((IsExcelNull(vigente.TipoOcupacion) && IsExcelNull(total.TipoOcupacion)) || vigente.TipoOcupacion.Equals(total.TipoOcupacion)) LOGFile.Write("1"); else LOGFile.Write("0"); // vacio NULL
+                    if (vigente.DescripcionTipoArrendamiento.Equals(total.DescripcionTipoArrendamiento)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    //if (vigente.TipoInmueble + "-" + total.TipoInmueble) LOGFile.Write("1"); else LOGFile.Write("0"); // total sin info
+                    if (!IsExcelNull(total.TipoInmueble)) LOGFile.Write("TipoInmueble no vacio");
+                    //if (vigente.TipoUsoInmueble + "-" + total.TipoUsoInmueble) LOGFile.Write("1"); else LOGFile.Write("0"); // total sin info
+                    if (!IsExcelNull(total.TipoUsoInmueble)) LOGFile.Write("TipoUsoInmueble no vacio");
+                    if (vigente.AreaOcupadaM2 == total.AreaOcupadaM2) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((decimal)vigente.MontoPagoMensual == total.MontoPagoMensual) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((decimal)vigente.CuotaMantenimiento == total.CuotaMantenimiento) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((decimal)vigente.MontoPagoPorCajonesEstacionamiento == total.MontoPagoPorCajonesEstacionamiento) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((decimal)vigente.MontoDictaminado == total.MontoDictaminado) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((decimal)vigente.RentaUnitariaMensual == total.RentaUnitariaMensual) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((decimal)vigente.MontoAnterior == total.MontoAnterior) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if (vigente.SMOI == total.SMOI) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if (vigente.TablaSmoi.Equals(total.TablaSMOI)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((DateTime)vigente.Fecha == Convert.ToDateTime(total.Fecha)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((DateTime)vigente.FechaContratoDesde == Convert.ToDateTime(total.FechaContratoDesde)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((DateTime)vigente.FechaContratoHasta == Convert.ToDateTime(total.FechaCntratoHasta)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if ((DateTime)vigente.FechaDictamen == Convert.ToDateTime(total.FechaDictamen)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if (vigente.DescripcionTipoContratacion.Equals(total.DescripcionTipoContratacion)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if (vigente.ResultadoOpinion.Equals(total.ResultadosOpinion)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    if (vigente.RIUF.Equals(total.RIUF)) LOGFile.Write("1"); else LOGFile.Write("0");
+                    LOGFile.WriteLine();
+                }
+            }
+            
+            LOGFile.WriteLine("Registros NoUtili modificados ");
+            LOGFile.WriteLine("Contratos sin Inmueble ");
+            SqlFile.Close();
+            LOGFile.Close();
+        }
+
         static void Main(string[] args)
         {
             //comparacionNoUtili();
-            BusquedaVigentes();
+            //BusquedaVigentes();
+           
+            BusquedaVigentesEnReporteTotal();
 
            
         }
