@@ -301,12 +301,27 @@ namespace ComparaciónNoUtili
             return "";
         }
 
+        static public string GetInstitucion(int FkIdInstitucion)
+        {
+            DB_CAT_NuevaEntities ctx = new DB_CAT_NuevaEntities();
+            var Institucion = (from inst in ctx.Cat_Institucion where FkIdInstitucion == inst.IdInstitucion select inst);
+            foreach (var i in Institucion) return i.DescripcionInstitucion;
+            return "";
+        }
+
         static public string EDS(string valor)
         {
+            char[] quitarChars = { ' ', '"' };
             if (IsExcelNull(valor))
                 return "";
             else
-                return System.Text.RegularExpressions.Regex.Replace(valor, @"\s+", " ").Trim().ToLower() ;
+            {
+                byte[] tempBytes;
+                tempBytes = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(valor);
+                string asciiStr = System.Text.Encoding.UTF8.GetString(tempBytes);
+                return System.Text.RegularExpressions.Regex.Replace(asciiStr, @"\s+", " ").Trim(quitarChars).ToLower();
+            }
+                
         }
 
         static public string HEXAString(string valor)
@@ -409,6 +424,10 @@ namespace ComparaciónNoUtili
             }
         }
 
+        /*
+         * Todos los registros vigentes que proporcionó el usuario están en el Reporte Total
+         */
+
         static void BusquedaVigentesEnReporteTotal()
         {
             ArrendamientoInmuebleEntities ctx = new ArrendamientoInmuebleEntities();
@@ -453,20 +472,29 @@ namespace ComparaciónNoUtili
                     RegistrosIguales &= Result(line, out line, EDS(vigente.Estado).Equals(EDS(estado)) || IsExcelNull(estado), "-Edo no vacio-");
                     //if (vigente.Municipio + "-" + total.Municipio); // total vacio
                     string municipio = GetMunicipio((int)total.Fk_IdMunicipio).ToUpper();
+                    if(!(EDS(vigente.Municipio).Equals(EDS(municipio)) || IsExcelNull(municipio)))
+                    {
+                        SqlFile.WriteLine("{0}-{1}/{2}-{3}-{4}",total.FolioContrato,vigente.ID,total.Fk_IdMunicipio,municipio, vigente.Municipio);
+                    }
                     RegistrosIguales &= Result(line, out line, EDS(vigente.Municipio).Equals(EDS(municipio)) || IsExcelNull(municipio), "-Municipio no vacio-");
                     RegistrosIguales &= Result(line, out line, EDS(vigente.Colonia).Equals(EDS(total.Colonia)) || IsExcelNull(total.Colonia), "");
                     RegistrosIguales &= Result(line, out line, EDS(vigente.Calle).Equals(EDS(total.Calle)), "");
                                                         //  10
                     RegistrosIguales &= Result(line, out line, vigente.CodigoPostal.Equals(total.CodigoPostal), "");
-                    RegistrosIguales &= Result(line, out line, (IsExcelNull(vigente.NumInterior) && IsExcelNull(total.NumInterior)) || vigente.NumInterior.Equals(total.NumInterior), ""); // sin info los dos
-                    RegistrosIguales &= Result(line, out line, vigente.NumExterior.Equals(total.NumExterior), "");
+                    if (!EDS(vigente.NumInterior).Equals(EDS(total.NumInterior)))
+                    {
+                        SqlFile.WriteLine("{0}-{1}/{2}-{3}-{4}", total.FolioContrato, vigente.ID, total.Fk_IdMunicipio, municipio, vigente.Municipio);
+                    }
+                    RegistrosIguales &= Result(line, out line, EDS(vigente.NumInterior).Equals(EDS(total.NumInterior)), ""); // sin info los dos
+                    
+                    RegistrosIguales &= Result(line, out line, EDS(vigente.NumExterior).Equals(EDS(total.NumExterior)), "Numero ext dif");
                     RegistrosIguales &= Result(line, out line, (IsExcelNull(vigente.Ciudad) && IsExcelNull(total.Ciudad)) || vigente.Ciudad.Equals(total.Ciudad), ""); // nulo blanco
                                 // O J  O
                     // Otro uso inmueble: preguntar si es importante o quen gana o como se define
                     RegistrosIguales &= Result(line, out line, vigente.OtroUsoInmueble.Equals(total.OtroUsoInmueble) || true, "");
                     
-                    //  15
-                    RegistrosIguales &= Result(line, out line, vigente.TipoContrato.Equals(total.TipoContrato), "");
+                                                        //  15
+                    RegistrosIguales &= Result(line, out line, EDS(vigente.TipoContrato).Equals(EDS(total.TipoContrato)), "");
                     RegistrosIguales &= Result(line, out line, (IsExcelNull(vigente.TipoOcupacion) && IsExcelNull(total.TipoOcupacion)) || vigente.TipoOcupacion.Equals(total.TipoOcupacion), ""); // vacio NULL
                     RegistrosIguales &= Result(line, out line, vigente.DescripcionTipoArrendamiento.Equals(total.DescripcionTipoArrendamiento), "");
                     //if (vigente.TipoInmueble + "-" + total.TipoInmueble); // total sin info
@@ -508,26 +536,63 @@ namespace ComparaciónNoUtili
             LOGFile.Close();
         }
 
+        static void ReporteTotalEnInmuebles()
+        {
+            ArrendamientoInmuebleEntities ctx = new ArrendamientoInmuebleEntities();
+            var Contratos = ctx.ContratoArrto;
+            var Vigentes = ctx.ContratosVigentes;
+            var Inmuebles = ctx.InmuebleArrendamiento;
+            var ReporteTotal = ctx.ReporteTotal;
+            string SQLqqsaved = @"D:\temp\SQLQQSAVED.txt";
+            string LOGqqsaved = @"D:\temp\LOGqqsaved.txt";
+            string line;
+            int registrosErroneos = 1;
+            int registros = 0;
+
+            if (File.Exists(SQLqqsaved)) File.Delete(SQLqqsaved);
+            StreamWriter SqlFile = new StreamWriter(SQLqqsaved);
+
+            if (File.Exists(LOGqqsaved)) File.Delete(LOGqqsaved);
+            StreamWriter LOGFile = new StreamWriter(LOGqqsaved);
+            LOGFile.WriteLine("\nCS " + ConfigurationManager.ConnectionStrings["ArrendamientoInmuebleEntities"]);
+
+            bool RegistrosIguales;
+            foreach (var reporte in ReporteTotal)
+            {
+                registros++;
+                line = ">" + reporte.NumeroSecuencial.ToString() + "/" + reporte.FolioContrato.ToString() + "<";
+                var inmueblesEncontrados = (from inmueble in Inmuebles
+                                        where EDS(reporte.Calle) == EDS(inmueble.NombreVialidad)
+                                        select inmueble);
+                foreach(var inenc in inmueblesEncontrados)
+                {
+                    RegistrosIguales = true;
+                    //  1
+                    string pais = GetPais((int)inenc.Fk_IdPais);
+                    RegistrosIguales &= Result(line, out line, EDS(GetPais((int)reporte.FkIdPais)).Equals(EDS(GetPais((int)inenc.Fk_IdPais))), "-pais no coincide-");
+                    RegistrosIguales &= Result(line, out line, GetInstitucion((int)reporte.Fk_IdInstitucion).Equals(GetInstitucion((int)inenc.Fk_IdInstitucion)), "-institucion no coincide-");
+
+                    if (!RegistrosIguales)
+                        LOGFile.WriteLine((registrosErroneos++).ToString() + line);
+                }
+                
+            }
+
+            LOGFile.WriteLine("Registros erroneos " + (registrosErroneos - 1).ToString());
+            Console.WriteLine("Registros Erroneo " + (registrosErroneos - 1).ToString());
+            Console.WriteLine("Registros " + (registros).ToString());
+            SqlFile.Close();
+            LOGFile.Close();
+        }
+
         static void Main(string[] args)
         {
-            //comparacionNoUtili();
-            //BusquedaVigentes();
-            //Console.WriteLine(CultureInfo.CurrentCulture.Name);
-            //Console.WriteLine("-" + HEXAString("abcdefghijklmnopqrstuvwxyz") + "-");
-            //Console.WriteLine("-" + HEXAString("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + "-");
-            //Console.WriteLine("-" + HEXAString("ÁÉÍÓÚÜÑ") + "-");
-            //Console.WriteLine("-" + HEXAString("áéíóúüñ") + "-");
-            //Console.WriteLine("-" + HEXAString("0123456789|°¬\"#$%&/()=?'\\¡¿´¨*+~[{^]}`<>,;.:-_") + "-");
-            //Console.ReadKey();
+            //comparacionNoUtili(); // No funcionó
+            //BusquedaVigentes();   // No funcionó
 
-            //string a = "AVENIDA CONSTITUYENTES DE 1975";
-            //int al = a.Length;
-            //string b = EDS(" AVENIDA CONSTITUYENTES DE 1975");
-            //int bl = b.Length;
-            //bool c = a.Equals(b);
-            BusquedaVigentesEnReporteTotal();
-
-           
+            //BusquedaVigentesEnReporteTotal();  // Funcionó - Todo vigente está en Reporte Total
+            //Hay que probar si Reporte Total está en inmuebles
+            ReporteTotalEnInmuebles();
         }
     }
 }
