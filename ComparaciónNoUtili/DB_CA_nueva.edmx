@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_CAT_NuevaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DB_CAT_NuevaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BitacoraSistema">
           <Key>
             <PropertyRef Name="IdBitacora" />
@@ -1103,62 +1103,62 @@ warning 6002: The table/view 'DB_CAT_Nueva.dbo.Temp_tipoDoctoAdjunto' does not h
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cat_Institucion_20171127" EntityType="Self.Cat_Institucion_20171127" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Cat_Institucion_20171127].[IdInstitucion] AS [IdInstitucion], 
-    [Cat_Institucion_20171127].[DescripcionInstitucion] AS [DescripcionInstitucion], 
-    [Cat_Institucion_20171127].[Fk_IdNatJuridica] AS [Fk_IdNatJuridica], 
-    [Cat_Institucion_20171127].[Fk_IdSector] AS [Fk_IdSector], 
-    [Cat_Institucion_20171127].[Fk_IdTipoInstitucion] AS [Fk_IdTipoInstitucion], 
-    [Cat_Institucion_20171127].[EstatusRegistro] AS [EstatusRegistro], 
-    [Cat_Institucion_20171127].[Fk_IdUsuarioRegistro] AS [Fk_IdUsuarioRegistro], 
-    [Cat_Institucion_20171127].[FechaRegistro] AS [FechaRegistro]
-    FROM [dbo].[Cat_Institucion_20171127] AS [Cat_Institucion_20171127]</DefiningQuery>
+[Cat_Institucion_20171127].[IdInstitucion] AS [IdInstitucion], 
+[Cat_Institucion_20171127].[DescripcionInstitucion] AS [DescripcionInstitucion], 
+[Cat_Institucion_20171127].[Fk_IdNatJuridica] AS [Fk_IdNatJuridica], 
+[Cat_Institucion_20171127].[Fk_IdSector] AS [Fk_IdSector], 
+[Cat_Institucion_20171127].[Fk_IdTipoInstitucion] AS [Fk_IdTipoInstitucion], 
+[Cat_Institucion_20171127].[EstatusRegistro] AS [EstatusRegistro], 
+[Cat_Institucion_20171127].[Fk_IdUsuarioRegistro] AS [Fk_IdUsuarioRegistro], 
+[Cat_Institucion_20171127].[FechaRegistro] AS [FechaRegistro]
+FROM [dbo].[Cat_Institucion_20171127] AS [Cat_Institucion_20171127]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Cat_TipoDomicilio" EntityType="Self.Cat_TipoDomicilio" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Cat_TipoDomicilio].[IdTipoDom] AS [IdTipoDom], 
-    [Cat_TipoDomicilio].[DescripcionTipoDom] AS [DescripcionTipoDom], 
-    [Cat_TipoDomicilio].[EstatusRegistro] AS [EstatusRegistro], 
-    [Cat_TipoDomicilio].[Fk_IdUsuarioRegistro] AS [Fk_IdUsuarioRegistro], 
-    [Cat_TipoDomicilio].[FechaRegistro] AS [FechaRegistro]
-    FROM [dbo].[Cat_TipoDomicilio] AS [Cat_TipoDomicilio]</DefiningQuery>
+[Cat_TipoDomicilio].[IdTipoDom] AS [IdTipoDom], 
+[Cat_TipoDomicilio].[DescripcionTipoDom] AS [DescripcionTipoDom], 
+[Cat_TipoDomicilio].[EstatusRegistro] AS [EstatusRegistro], 
+[Cat_TipoDomicilio].[Fk_IdUsuarioRegistro] AS [Fk_IdUsuarioRegistro], 
+[Cat_TipoDomicilio].[FechaRegistro] AS [FechaRegistro]
+FROM [dbo].[Cat_TipoDomicilio] AS [Cat_TipoDomicilio]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Cat_TipoUsuario" EntityType="Self.Cat_TipoUsuario" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Cat_TipoUsuario].[IdTipoUsuario] AS [IdTipoUsuario], 
-    [Cat_TipoUsuario].[DescripcionTipoUsuario] AS [DescripcionTipoUsuario], 
-    [Cat_TipoUsuario].[EstatusRegistro] AS [EstatusRegistro], 
-    [Cat_TipoUsuario].[Fk_IdUsuarioRegistro] AS [Fk_IdUsuarioRegistro], 
-    [Cat_TipoUsuario].[FechaRegistro] AS [FechaRegistro]
-    FROM [dbo].[Cat_TipoUsuario] AS [Cat_TipoUsuario]</DefiningQuery>
+[Cat_TipoUsuario].[IdTipoUsuario] AS [IdTipoUsuario], 
+[Cat_TipoUsuario].[DescripcionTipoUsuario] AS [DescripcionTipoUsuario], 
+[Cat_TipoUsuario].[EstatusRegistro] AS [EstatusRegistro], 
+[Cat_TipoUsuario].[Fk_IdUsuarioRegistro] AS [Fk_IdUsuarioRegistro], 
+[Cat_TipoUsuario].[FechaRegistro] AS [FechaRegistro]
+FROM [dbo].[Cat_TipoUsuario] AS [Cat_TipoUsuario]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Cat_TraductorInstitucion1" EntityType="Self.Cat_TraductorInstitucion1" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Cat_TraductorInstitucion1].[IdInstitucionActual] AS [IdInstitucionActual], 
-    [Cat_TraductorInstitucion1].[DescripcionInstitucion] AS [DescripcionInstitucion], 
-    [Cat_TraductorInstitucion1].[IdInstitucionAnterior] AS [IdInstitucionAnterior], 
-    [Cat_TraductorInstitucion1].[IdNatJuridica] AS [IdNatJuridica], 
-    [Cat_TraductorInstitucion1].[Fk_IdSector] AS [Fk_IdSector], 
-    [Cat_TraductorInstitucion1].[Fk_IdApliacion] AS [Fk_IdApliacion], 
-    [Cat_TraductorInstitucion1].[FechaRegistro] AS [FechaRegistro]
-    FROM [dbo].[Cat_TraductorInstitucion1] AS [Cat_TraductorInstitucion1]</DefiningQuery>
+[Cat_TraductorInstitucion1].[IdInstitucionActual] AS [IdInstitucionActual], 
+[Cat_TraductorInstitucion1].[DescripcionInstitucion] AS [DescripcionInstitucion], 
+[Cat_TraductorInstitucion1].[IdInstitucionAnterior] AS [IdInstitucionAnterior], 
+[Cat_TraductorInstitucion1].[IdNatJuridica] AS [IdNatJuridica], 
+[Cat_TraductorInstitucion1].[Fk_IdSector] AS [Fk_IdSector], 
+[Cat_TraductorInstitucion1].[Fk_IdApliacion] AS [Fk_IdApliacion], 
+[Cat_TraductorInstitucion1].[FechaRegistro] AS [FechaRegistro]
+FROM [dbo].[Cat_TraductorInstitucion1] AS [Cat_TraductorInstitucion1]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Cat_TraductorSector1" EntityType="Self.Cat_TraductorSector1" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Cat_TraductorSector1].[IdSectorActual] AS [IdSectorActual], 
-    [Cat_TraductorSector1].[DescripcionSector] AS [DescripcionSector], 
-    [Cat_TraductorSector1].[IdSectorAnterior] AS [IdSectorAnterior], 
-    [Cat_TraductorSector1].[IdAplicacion] AS [IdAplicacion], 
-    [Cat_TraductorSector1].[FechaRegistro] AS [FechaRegistro]
-    FROM [dbo].[Cat_TraductorSector1] AS [Cat_TraductorSector1]</DefiningQuery>
+[Cat_TraductorSector1].[IdSectorActual] AS [IdSectorActual], 
+[Cat_TraductorSector1].[DescripcionSector] AS [DescripcionSector], 
+[Cat_TraductorSector1].[IdSectorAnterior] AS [IdSectorAnterior], 
+[Cat_TraductorSector1].[IdAplicacion] AS [IdAplicacion], 
+[Cat_TraductorSector1].[FechaRegistro] AS [FechaRegistro]
+FROM [dbo].[Cat_TraductorSector1] AS [Cat_TraductorSector1]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Temp_tipoDoctoAdjunto" EntityType="Self.Temp_tipoDoctoAdjunto" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Temp_tipoDoctoAdjunto].[IdtipoDoctoAdj] AS [IdtipoDoctoAdj], 
-    [Temp_tipoDoctoAdjunto].[DescripcionTipoDoctoAdj] AS [DescripcionTipoDoctoAdj], 
-    [Temp_tipoDoctoAdjunto].[EstatusRegistro] AS [EstatusRegistro], 
-    [Temp_tipoDoctoAdjunto].[Fk_IdUsuarioRegistro] AS [Fk_IdUsuarioRegistro], 
-    [Temp_tipoDoctoAdjunto].[FechaRegistro] AS [FechaRegistro]
-    FROM [dbo].[Temp_tipoDoctoAdjunto] AS [Temp_tipoDoctoAdjunto]</DefiningQuery>
+[Temp_tipoDoctoAdjunto].[IdtipoDoctoAdj] AS [IdtipoDoctoAdj], 
+[Temp_tipoDoctoAdjunto].[DescripcionTipoDoctoAdj] AS [DescripcionTipoDoctoAdj], 
+[Temp_tipoDoctoAdjunto].[EstatusRegistro] AS [EstatusRegistro], 
+[Temp_tipoDoctoAdjunto].[Fk_IdUsuarioRegistro] AS [Fk_IdUsuarioRegistro], 
+[Temp_tipoDoctoAdjunto].[FechaRegistro] AS [FechaRegistro]
+FROM [dbo].[Temp_tipoDoctoAdjunto] AS [Temp_tipoDoctoAdjunto]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Cat_Cargo_RelCargoUnidadNeg" Association="Self.FK_Cat_Cargo_RelCargoUnidadNeg">
             <End Role="Cat_Cargo" EntitySet="Cat_Cargo" />
@@ -3306,7 +3306,7 @@ warning 6002: The table/view 'DB_CAT_Nueva.dbo.Temp_tipoDoctoAdjunto' does not h
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

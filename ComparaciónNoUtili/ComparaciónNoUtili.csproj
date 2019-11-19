@@ -11,6 +11,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,18 +32,23 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="FuncionesInSQLfromCS">
+      <HintPath>..\..\FuncionesInSQLfromCS\FuncionesInSQLfromCS\bin\Debug\FuncionesInSQLfromCS.dll</HintPath>
+    </Reference>
+    <Reference Include="INDAABIN_Utilerias">
+      <HintPath>..\..\INDAABIN_Utilerias\INDAABIN_Utilerias\bin\Debug\INDAABIN_Utilerias.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -62,73 +69,73 @@
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="BitacoraSistema.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_AdmonCarretera.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Asentamiento.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Bancos.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Calendario.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_CampoReporte.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Cargo.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_CatalogadoPor.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_CategoriaGeneral.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_ClasificacionReligiosa.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_CodigoPostal.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_ComponenteEspacial.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_CRITERIOS.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_DerechoTransito.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_DiasInhabiles.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_DoctoAlterno.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Documento.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Emisor.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Estado.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_EstadoCivil.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Genero.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Indicador.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Institucion.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_InstitucionContratosDBCATNueva.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
@@ -137,55 +144,55 @@
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_InstitucionExpide.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Institucion_20171127.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_LeyendaAnual.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Localidades.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_MargenCamino.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Mes.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Municipio.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_NatJuridica.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_NivelGobierno.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Pais.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Parametro.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_ParametroHistorico.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Periodo.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Prioridad.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Procedencia.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Sector.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Supuestos.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Tabla.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
@@ -194,16 +201,16 @@
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TerminoGenCamino.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoArrendamiento.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoAsenta.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoAsentamiento.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoContratacion.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
@@ -212,94 +219,94 @@
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoDependencia.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoDocumentoAdjunto.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoDomicilio.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoExcepcionNormativaContrato.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoIdentificacion.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoInmueble.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoInstitucion.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoMoneda.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoNotario.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoOcupacion.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoPatente.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoPersona.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoPersonaReferencia.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoProcedimiento.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoRecepcion.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TiposOrganizacion.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoTelefono.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoUsoInmueble.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoUsuario.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TipoVialidad.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TIPO_VALOR.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TituloPersona.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TraductorInstitucion1.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_TraductorSector1.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="CAT_TRIMESTRE.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_UnidadMedida.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_UnidadNegocio.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_UsoEspecifico.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_UsoGenerico.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Cat_Zona.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Concepto.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
@@ -334,20 +341,20 @@
     <Compile Include="dbcatnueva_instituciones.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB_CAT_Nueva.Context.cs">
+    <Compile Include="DB_CA_nueva.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DB_CAT_Nueva.Context.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB_CAT_Nueva.cs">
+    <Compile Include="DB_CA_nueva.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB_CAT_Nueva.Designer.cs">
+    <Compile Include="DB_CA_nueva.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DB_CAT_Nueva.edmx</DependentUpon>
+      <DependentUpon>DB_CA_nueva.edmx</DependentUpon>
     </Compile>
     <Compile Include="EmisionOpinonContrato.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
@@ -394,6 +401,9 @@
     <Compile Include="Movimiento.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
+    <Compile Include="NoUtiliAuditoria2019P_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
     <Compile Include="NoUtiliAuditoria2019T.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
@@ -415,13 +425,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelCargoUnidadNeg.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Rel_ConceptoRespValor.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
     <Compile Include="Rel_TipoIdentificacionInstExpide.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="ReporteTotal.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
@@ -441,11 +451,89 @@
     <Compile Include="SelloDigital.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
+    <Compile Include="SPLIT_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuConsultadeTodoslosContratos_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuInsertInmueble_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuObtenerAcuseCuerpoSAEF_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuObtenerAcuseHeaderSelloSAEF_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuObtenerEmisionOpinion_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuObtenerFundamentoLegalXCptoNumOrden_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuObtenerInmueblesConvenioModificatorio_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuObtenerSMOIfolio_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuPaginandoSelectTabla_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectAcuseContrato_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectAcuseEmisionOpinionXIdFolio_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectAcuseSMOI_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectConceptosXResponderSMOI_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectConceptosXResponderTema_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectContratoArrto_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectContratosHistoricoXInstitucionEdoMpo_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectDatosAPartirDelFolioContrato_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectEstadoMpoXIdInmuebleArrto_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectExcepcionNormativaContratoArrto_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectInmuebleArrtoXId_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectInmuebles_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectMvtosEmisionOpinionParaInmueblesArrto_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectSolicitudesEmisionOpinionEmitidas_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectSolicitudesSMOIEmitidas_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spuSelectTotalSMOIxFolioOpinion_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="Temp_tipoDoctoAdjunto.cs">
-      <DependentUpon>DB_CAT_Nueva.tt</DependentUpon>
+      <DependentUpon>DB_CA_nueva.tt</DependentUpon>
     </Compile>
     <Compile Include="TraductorRUSP_INST.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
@@ -456,43 +544,37 @@
     <Compile Include="TRADUCTOR_cat.cs">
       <DependentUpon>ModelosContrato.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="ModelosContrato.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelosContrato.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="App.Config" />
-    <EntityDeploy Include="DB_CAT_Nueva.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DB_CAT_Nueva.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DB_CAT_Nueva.edmx.diagram">
-      <DependentUpon>DB_CAT_Nueva.edmx</DependentUpon>
-    </None>
-    <None Include="ModelosContrato.edmx.diagram">
-      <DependentUpon>ModelosContrato.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
+    <Compile Include="usp_ActualizarRIUF_Result.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_DWH_CONTRATORIUF.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_DWH_RIUF.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vw_QlikContratoArren.cs">
+      <DependentUpon>ModelosContrato.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DB_CAT_Nueva.Context.tt">
+    <Content Include="DB_CA_nueva.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DB_CAT_Nueva.edmx</DependentUpon>
-      <LastGenOutput>DB_CAT_Nueva.Context.cs</LastGenOutput>
+      <DependentUpon>DB_CA_nueva.edmx</DependentUpon>
+      <LastGenOutput>DB_CA_nueva.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DB_CAT_Nueva.tt">
+    <Content Include="DB_CA_nueva.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DB_CAT_Nueva.edmx</DependentUpon>
-      <LastGenOutput>DB_CAT_Nueva.cs</LastGenOutput>
+      <DependentUpon>DB_CA_nueva.edmx</DependentUpon>
+      <LastGenOutput>DB_CA_nueva.cs</LastGenOutput>
     </Content>
     <Content Include="ModelosContrato.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelosContrato.edmx</DependentUpon>
       <LastGenOutput>ModelosContrato.Context.cs</LastGenOutput>
+      <DependentUpon>ModelosContrato.edmx</DependentUpon>
     </Content>
     <Content Include="ModelosContrato.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -503,8 +585,28 @@
     <Content Include="SQL\Comparacion ReporteTotalVigentes.sql" />
     <Content Include="SQL\CreaTablaReporteTotal.sql" />
     <Content Include="SQL\Create_Noutili.sql" />
+    <Content Include="SQL\EDSWrap.sql" />
     <Content Include="SQL\spuNoUtili.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EntityDeploy Include="ModelosContrato.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelosContrato.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="DB_CA_nueva.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DB_CA_nueva.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DB_CA_nueva.edmx.diagram">
+      <DependentUpon>DB_CA_nueva.edmx</DependentUpon>
+    </None>
+    <None Include="ModelosContrato.edmx.diagram">
+      <DependentUpon>ModelosContrato.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

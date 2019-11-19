@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.IO;
-using System.Text;
-using System.Globalization;
+using INDAABIN_Utilerias;
+using System.Data.SqlTypes;
+using System.Data.Entity;
+using System.Data.Objects.DataClasses;
 
 namespace ComparaciónNoUtili
 {
@@ -309,106 +309,6 @@ namespace ComparaciónNoUtili
             return "";
         }
 
-        static public string EDS(string valor)
-        {
-            char[] quitarChars = { ' ', '"' };
-            if (IsExcelNull(valor))
-                return "";
-            else
-            {
-                byte[] tempBytes;
-                tempBytes = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(valor);
-                string asciiStr = System.Text.Encoding.UTF8.GetString(tempBytes);
-                return System.Text.RegularExpressions.Regex.Replace(asciiStr, @"\s+", " ").Trim(quitarChars).ToLower();
-            }
-                
-        }
-
-        static public string HEXAString(string valor)
-        {
-            byte[] ba = Encoding.Default.GetBytes(valor);
-            return BitConverter.ToString(ba).Replace("-","").ToUpper();
-        }
-
-        static public string CleanExcelString(string input)
-        {
-            char[] QuitaChars = { '"', ' ', '\\' };
-            input = input.Trim(QuitaChars);
-            int pos;
-            while ((pos = input.IndexOf(',')) >= 0)
-            {
-                input = input.Remove(pos, 1);
-            }
-            while ((pos = input.IndexOf('\\')) >= 0)
-            {
-                input = input.Remove(pos, 1);
-            }
-            while ((pos = input.IndexOf('$')) >= 0)
-            {
-                input = input.Remove(pos, 1);
-            }
-            while ((pos = input.IndexOf(' ')) >= 0)
-            {
-                input = input.Remove(pos, 1);
-            }
-            while ((pos = input.IndexOf('"')) >= 0)
-            {
-                input = input.Remove(pos, 1);
-            }
-            return input;
-        }
-
-        static public Decimal DineroADecimal(int index, string monto)
-        {
-            if (IsExcelNull(monto))
-            {
-                return (Decimal)0.0;
-            }
-            else
-            {
-                Console.WriteLine("-" + index + "-" + monto);
-                monto = CleanExcelString(monto);
-                Console.WriteLine("--" + monto);
-                return Convert.ToDecimal(monto);
-            }
-        }
-
-        static public Decimal ExcelNumeroADecimal(int index, string monto)
-        {
-            if (IsExcelNull(monto))
-            {
-                return (Decimal)0.0;
-            }
-            else
-            {
-                Console.WriteLine("-" + index + "-" + monto);
-                monto = CleanExcelString(monto);
-                Console.WriteLine("--" + monto);
-                return Convert.ToDecimal(monto);
-            }
-        }
-
-        static public Double ExcelNumeroADouble(int index, string monto)
-        {
-            if (IsExcelNull(monto))
-            {
-                return (Double)0.0;
-            }
-            else
-            {
-                Console.WriteLine("-" + index + "-" + monto);
-                monto = CleanExcelString(monto);
-                Console.WriteLine("--" + monto);
-                return Convert.ToDouble(monto);
-            }
-        }
-
-
-        static public bool IsExcelNull(string valor)
-        {
-            if (String.IsNullOrEmpty(valor) || valor.Equals("NULL") || String.IsNullOrWhiteSpace(valor)) return true; else return false;
-        }
-
         static public bool Result(string linein, out string line, bool comp, string msg)
         {
             line = linein;
@@ -461,49 +361,49 @@ namespace ComparaciónNoUtili
                     RegistrosIguales = true;
                                                         //  1
                     RegistrosIguales &= Result(line, out line, vigente.FolioContrato == total.FolioContrato, "");
-                    RegistrosIguales &= Result(line, out line, EDS(vigente.Propietario).Equals(EDS(total.Propietario)), "");
-                    RegistrosIguales &= Result(line, out line, EDS(vigente.Responsable).Equals(EDS(total.Responsable)), "");
-                    RegistrosIguales &= Result(line, out line, EDS(vigente.Promovente).Equals(EDS(total.Promovente)), "");
+                    RegistrosIguales &= Result(line, out line, U.EDS(vigente.Propietario).Equals(U.EDS(total.Propietario)), "");
+                    RegistrosIguales &= Result(line, out line, U.EDS(vigente.Responsable).Equals(U.EDS(total.Responsable)), "");
+                    RegistrosIguales &= Result(line, out line, U.EDS(vigente.Promovente).Equals(U.EDS(total.Promovente)), "");
                     string pais = GetPais(total.FkIdPais).ToUpper();
                                                         //  5
                     RegistrosIguales &= Result(line, out line, vigente.Pais.Equals(pais), ""); // no letra y numero
                     //if (vigente.Estado + "-" + total.Estado); // total vacio
                     string estado = GetEstado((int)total.Fk_IdEstado).ToUpper();
-                    RegistrosIguales &= Result(line, out line, EDS(vigente.Estado).Equals(EDS(estado)) || IsExcelNull(estado), "-Edo no vacio-");
+                    RegistrosIguales &= Result(line, out line, U.EDS(vigente.Estado).Equals(U.EDS(estado)) || U.IsExcelNull(estado), "-Edo no vacio-");
                     //if (vigente.Municipio + "-" + total.Municipio); // total vacio
                     string municipio = GetMunicipio((int)total.Fk_IdMunicipio).ToUpper();
-                    if(!(EDS(vigente.Municipio).Equals(EDS(municipio)) || IsExcelNull(municipio)))
+                    if(!(U.EDS(vigente.Municipio).Equals(U.EDS(municipio)) || U.IsExcelNull(municipio)))
                     {
                         SqlFile.WriteLine("{0}-{1}/{2}-{3}-{4}",total.FolioContrato,vigente.ID,total.Fk_IdMunicipio,municipio, vigente.Municipio);
                     }
-                    RegistrosIguales &= Result(line, out line, EDS(vigente.Municipio).Equals(EDS(municipio)) || IsExcelNull(municipio), "-Municipio no vacio-");
-                    RegistrosIguales &= Result(line, out line, EDS(vigente.Colonia).Equals(EDS(total.Colonia)) || IsExcelNull(total.Colonia), "");
-                    RegistrosIguales &= Result(line, out line, EDS(vigente.Calle).Equals(EDS(total.Calle)), "");
+                    RegistrosIguales &= Result(line, out line, U.EDS(vigente.Municipio).Equals(U.EDS(municipio)) || U.IsExcelNull(municipio), "-Municipio no vacio-");
+                    RegistrosIguales &= Result(line, out line, U.EDS(vigente.Colonia).Equals(U.EDS(total.Colonia)) || U.IsExcelNull(total.Colonia), "");
+                    RegistrosIguales &= Result(line, out line, U.EDS(vigente.Calle).Equals(U.EDS(total.Calle)), "");
                                                         //  10
                     RegistrosIguales &= Result(line, out line, vigente.CodigoPostal.Equals(total.CodigoPostal), "");
-                    if (!EDS(vigente.NumInterior).Equals(EDS(total.NumInterior)))
+                    if (!U.EDS(vigente.NumInterior).Equals(U.EDS(total.NumInterior)))
                     {
                         SqlFile.WriteLine("{0}-{1}/{2}-{3}-{4}", total.FolioContrato, vigente.ID, total.Fk_IdMunicipio, municipio, vigente.Municipio);
                     }
-                    RegistrosIguales &= Result(line, out line, EDS(vigente.NumInterior).Equals(EDS(total.NumInterior)), ""); // sin info los dos
+                    RegistrosIguales &= Result(line, out line, U.EDS(vigente.NumInterior).Equals(U.EDS(total.NumInterior)), ""); // sin info los dos
                     
-                    RegistrosIguales &= Result(line, out line, EDS(vigente.NumExterior).Equals(EDS(total.NumExterior)), "Numero ext dif");
-                    RegistrosIguales &= Result(line, out line, (IsExcelNull(vigente.Ciudad) && IsExcelNull(total.Ciudad)) || vigente.Ciudad.Equals(total.Ciudad), ""); // nulo blanco
+                    RegistrosIguales &= Result(line, out line, U.EDS(vigente.NumExterior).Equals(U.EDS(total.NumExterior)), "Numero ext dif");
+                    RegistrosIguales &= Result(line, out line, (U.IsExcelNull(vigente.Ciudad) && U.IsExcelNull(total.Ciudad)) || vigente.Ciudad.Equals(total.Ciudad), ""); // nulo blanco
                                 // O J  O
                     // Otro uso inmueble: preguntar si es importante o quen gana o como se define
                     RegistrosIguales &= Result(line, out line, vigente.OtroUsoInmueble.Equals(total.OtroUsoInmueble) || true, "");
                     
                                                         //  15
-                    RegistrosIguales &= Result(line, out line, EDS(vigente.TipoContrato).Equals(EDS(total.TipoContrato)), "");
-                    RegistrosIguales &= Result(line, out line, (IsExcelNull(vigente.TipoOcupacion) && IsExcelNull(total.TipoOcupacion)) || vigente.TipoOcupacion.Equals(total.TipoOcupacion), ""); // vacio NULL
+                    RegistrosIguales &= Result(line, out line, U.EDS(vigente.TipoContrato).Equals(U.EDS(total.TipoContrato)), "");
+                    RegistrosIguales &= Result(line, out line, (U.IsExcelNull(vigente.TipoOcupacion) && U.IsExcelNull(total.TipoOcupacion)) || vigente.TipoOcupacion.Equals(total.TipoOcupacion), ""); // vacio NULL
                     RegistrosIguales &= Result(line, out line, vigente.DescripcionTipoArrendamiento.Equals(total.DescripcionTipoArrendamiento), "");
                     //if (vigente.TipoInmueble + "-" + total.TipoInmueble); // total sin info
                     string tipoInmueble = GetTipoInmueble((int)total.Fk_IdTipoInmueble).ToString();
-                    RegistrosIguales &= Result(line, out line, EDS(vigente.TipoInmueble).Equals(EDS(tipoInmueble)), "-TipoInmueble no vacio-");
+                    RegistrosIguales &= Result(line, out line, U.EDS(vigente.TipoInmueble).Equals(U.EDS(tipoInmueble)), "-TipoInmueble no vacio-");
                     //if (vigente.TipoUsoInmueble + "-" + total.TipoUsoInmueble); // total sin info
                     string tipoUsoInmueble = GetTipoUsoInmueble((int)total.Fk_IdTipoUsoInmueble).ToString();
 
-                    RegistrosIguales &= Result(line, out line, EDS(vigente.TipoUsoInmueble).Equals(EDS(tipoUsoInmueble)) || IsExcelNull(tipoUsoInmueble), "-TipoUsoInmueble no vacio-");
+                    RegistrosIguales &= Result(line, out line, U.EDS(vigente.TipoUsoInmueble).Equals(U.EDS(tipoUsoInmueble)) || U.IsExcelNull(tipoUsoInmueble), "-TipoUsoInmueble no vacio-");
                                                         //  20
                     RegistrosIguales &= Result(line, out line, vigente.AreaOcupadaM2 == total.AreaOcupadaM2, "");
                     RegistrosIguales &= Result(line, out line, (decimal)vigente.MontoPagoMensual == total.MontoPagoMensual, "");
@@ -520,7 +420,7 @@ namespace ComparaciónNoUtili
                     RegistrosIguales &= Result(line, out line, (DateTime)vigente.FechaContratoDesde == Convert.ToDateTime(total.FechaContratoDesde), "");
                     RegistrosIguales &= Result(line, out line, (DateTime)vigente.FechaContratoHasta == Convert.ToDateTime(total.FechaCntratoHasta), "");
                     RegistrosIguales &= Result(line, out line, (DateTime)vigente.FechaDictamen == Convert.ToDateTime(total.FechaDictamen), "");
-                    RegistrosIguales &= Result(line, out line, (IsExcelNull(vigente.DescripcionTipoContratacion) && IsExcelNull(total.DescripcionTipoContratacion)) || EDS(vigente.DescripcionTipoContratacion).Equals(EDS(total.DescripcionTipoContratacion)), "");
+                    RegistrosIguales &= Result(line, out line, (U.IsExcelNull(vigente.DescripcionTipoContratacion) && U.IsExcelNull(total.DescripcionTipoContratacion)) || U.EDS(vigente.DescripcionTipoContratacion).Equals(U.EDS(total.DescripcionTipoContratacion)), "");
                     RegistrosIguales &= Result(line, out line, vigente.ResultadoOpinion.Equals(total.ResultadosOpinion), "");
                                                         //  35
                     RegistrosIguales &= Result(line, out line, vigente.RIUF.Equals(total.RIUF), "");
@@ -535,6 +435,18 @@ namespace ComparaciónNoUtili
             SqlFile.Close();
             LOGFile.Close();
         }
+
+        /*
+         No Encontré la forma de hacer jalar esta forma de hacer las cosas
+
+        // https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/how-to-call-custom-database-functions
+        
+        [EdmFunction("ArrendemientoInmuebleModel.Store", "EDS")]
+        public static decimal AvgStudentGrade(int stid)
+        {
+            throw new NotSupportedException("Direct calls to EDS are not supported.");
+        }
+        */
 
         static void ReporteTotalEnInmuebles()
         {
@@ -560,22 +472,39 @@ namespace ComparaciónNoUtili
             foreach (var reporte in ReporteTotal)
             {
                 registros++;
-                line = ">" + reporte.NumeroSecuencial.ToString() + "/" + reporte.FolioContrato.ToString() + "<";
-                var inmueblesEncontrados = (from inmueble in Inmuebles
-                                        where EDS(reporte.Calle) == EDS(inmueble.NombreVialidad)
-                                        select inmueble);
-                foreach(var inenc in inmueblesEncontrados)
-                {
-                    RegistrosIguales = true;
-                    //  1
-                    string pais = GetPais((int)inenc.Fk_IdPais);
-                    RegistrosIguales &= Result(line, out line, EDS(GetPais((int)reporte.FkIdPais)).Equals(EDS(GetPais((int)inenc.Fk_IdPais))), "-pais no coincide-");
-                    RegistrosIguales &= Result(line, out line, GetInstitucion((int)reporte.Fk_IdInstitucion).Equals(GetInstitucion((int)inenc.Fk_IdInstitucion)), "-institucion no coincide-");
-
-                    if (!RegistrosIguales)
-                        LOGFile.WriteLine((registrosErroneos++).ToString() + line);
-                }
                 
+                line = ">" + reporte.NumeroSecuencial.ToString() + "/" + reporte.FolioContrato.ToString() + "<";
+
+                // No podemos usar LINQ para llamar funciones creadas en c#
+                // manejemos la memoria de la computadora local
+                /*
+                var inmueblesEncontrados = (from inmueble in Inmuebles
+                                            where EDS(reporte.Calle).Equals(EDS(inmueble.NombreVialidad))
+                                            select new { AvgStudentGrade("hola") });
+                */
+                foreach (var inmueble in Inmuebles)
+                {
+                    if (U.EDS(reporte.Calle).Equals(U.EDS(inmueble.NombreVialidad))) { // esto es casi equivalente a la expr LINQ
+                        RegistrosIguales = true;
+                        line += ">" + inmueble.IdInmuebleArrendamiento.ToString() + "<";
+                        //  1
+                        RegistrosIguales &= Result(line, out line, reporte.FkIdPais == inmueble.Fk_IdPais, "-pais no coincide-" + reporte.FkIdPais.ToString() + "-" + inmueble.Fk_IdPais.ToString() + "-");
+                        //RegistrosIguales &= Result(line, out line, GetInstitucion((int)reporte.Fk_IdInstitucion).Equals(GetInstitucion((int)inenc.Fk_IdInstitucion)), "-institucion no coincide-");
+                        RegistrosIguales &= Result(line, out line, reporte.Fk_IdTipoInmueble == inmueble.Fk_IdTipoInmueble, "-institucion no coincide-" + reporte.Fk_IdTipoInmueble.ToString() + "-" + inmueble.Fk_IdTipoInmueble.ToString() + "-");
+                        RegistrosIguales &= Result(line, out line, reporte.Fk_IdEstado == inmueble.Fk_IdEstado, "-Estado no coincide-" + reporte.Fk_IdEstado.ToString() + "-" + inmueble.Fk_IdEstado.ToString() + "-");
+                        RegistrosIguales &= Result(line, out line, reporte.Fk_IdMunicipio == inmueble.Fk_IdMunicipio, "-Municipio no coincide-" + reporte.Fk_IdMunicipio.ToString() + "-" + inmueble.Fk_IdMunicipio.ToString() + "-");
+                        RegistrosIguales &= Result(line, out line, reporte.Fk_IdLocalidad == inmueble.Fk_IdLocalidad, "-Localidad no coincide-" + reporte.Fk_IdLocalidad.ToString() + "-" + inmueble.Fk_IdLocalidad.ToString() + "-");
+                        //  5
+                        RegistrosIguales &= Result(line, out line, U.EDS(reporte.Colonia).Equals(U.EDS( inmueble.OtraColonia)), "-Colonia no coincide-" + U.IsNull(reporte.Colonia).ToString() + "-" + U.IsNull(inmueble.OtraColonia).ToString() + "-");
+                        RegistrosIguales &= Result(line, out line, U.EDS(reporte.Calle).Equals(U.EDS(inmueble.NombreVialidad)), "-Calle no coincide-" + U.IsNull(reporte.Calle).ToString() + "-" + U.IsNull(inmueble.NombreVialidad).ToString() + "-");
+                        RegistrosIguales &= Result(line, out line, U.EDS(reporte.NumExterior).Equals(U.EDS(inmueble.NumExterior)), "-NumExterior no coincide-" + U.IsNull(reporte.NumExterior) + "-" + U.IsNull(inmueble.NumExterior) + "-");
+                        RegistrosIguales &= Result(line, out line, U.EDS(reporte.NumInterior).Equals(U.EDS(inmueble.NumInterior)), "-NumInterior no coincide-" + U.IsNull(reporte.NumInterior) + "-" + U.IsNull(inmueble.NumInterior) + "-");
+                        RegistrosIguales &= Result(line, out line, U.EDS(reporte.CodigoPostal).Equals(U.EDS(inmueble.CodigoPostal)), "-Codigo Postal no coincide-" + U.IsNull(reporte.CodigoPostal) + "-" + U.IsNull(inmueble.CodigoPostal) + "-");
+
+                        if (!RegistrosIguales)
+                            LOGFile.WriteLine((registrosErroneos++).ToString() + line);
+                    }
+                }
             }
 
             LOGFile.WriteLine("Registros erroneos " + (registrosErroneos - 1).ToString());
@@ -634,10 +563,6 @@ namespace ComparaciónNoUtili
             */
 
 /*
-        
- */
-
-/*
  // Aqui tenemos un contrato vigente que no está relacionado con un contrato en la relación inversa 
                     // porque el folio del vigente no esta en la tabla NOUTILI, se verifico los contratos vigentes todos tienen folio Contrato
                     // Vamos a identificar porque la tabla NOUTILI esta incompleta, primero vamos a corregir NOUTILI.
@@ -677,3 +602,15 @@ namespace ComparaciónNoUtili
                         }
                     }
  */
+/*    Ejemplo de como registrar funciones en sql
+CREATE ASSEMBLY [MyAssembly] 
+FROM 'C:\Path\To\Assembly\MyAssembly.dll'
+WITH PERMISSION_SET = SAFE
+GO
+
+CREATE FUNCTION [dbo].[Replace](@input [nvarchar](4000), @pattern [nvarchar](4000),  @replacement [nvarchar](4000), @options [int] = 0)
+  RETURNS [nvarchar](4000) NULL
+  WITH EXECUTE AS CALLER
+  AS EXTERNAL NAME [MyAssembly].[MyNamespace.UserDefinedFunctions].[Replace]
+GO
+*/
